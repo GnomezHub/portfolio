@@ -11,10 +11,14 @@ import {
   ExternalLink,
 } from "lucide-react";
 
+import ContactForm from "./components/ContactForm";
+
 // Huvudkomponenten för portfolion
-const App = () => {
+const Otherapp = () => {
   // State för att hantera aktiv sektion för navigering
   const [activeSection, setActiveSection] = useState("home");
+  // State för att hantera synlighet av mobilnavigering
+  // const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   // State för att hantera parallax-offset för bakgrunden
   const [parallaxOffset, setParallaxOffset] = useState(0);
 
@@ -23,7 +27,9 @@ const App = () => {
   useEffect(() => {
     const handleScroll = () => {
       // Justera värdet (t.ex. 0.3 eller 0.7) för att ändra parallax-hastigheten.
-      setParallaxOffset(window.scrollY * 0.5);
+      // Ett högre värde (närmare 1) gör att bakgrunden rör sig mer med skrollen.
+      // Ett lägre värde (närmare 0) gör att bakgrunden rör sig mindre (mer "fixed").
+      setParallaxOffset(window.scrollY * -0.1); // Justerat till 0.4 för en märkbar men inte för snabb effekt
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -36,6 +42,7 @@ const App = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+    // setIsMobileNavOpen(false); // Stänger mobilnavigeringen efter klick
   };
 
   // Effekt för att uppdatera aktiv sektion och trigga animationer vid skroll
@@ -46,21 +53,26 @@ const App = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setActiveSection(entry.target.id);
+
+            // Hitta och animera element med 'data-animation' attributet inuti den synliga sektionen
             const animatableElements =
               entry.target.querySelectorAll("[data-animation]");
             animatableElements.forEach((el) => {
               const animationType = el.dataset.animation;
               el.classList.add(`animate-${animationType}`);
-              if (el.dataset.staggerIndex) {
+              // Om det är ett "staggered" element, applicera fördröjning
+              if (el.dataset.staggerIndex !== undefined) {
                 el.style.animationDelay = `${
                   parseInt(el.dataset.staggerIndex) * 150
                 }ms`;
               }
             });
           }
+          // Animationen spelas bara en gång när elementet kommer in i vyn,
+          // och förblir i sitt animerade (synliga) tillstånd.
         });
       },
-      { rootMargin: "-50% 0px -50% 0px" } // Mer centrerad triggerpunkt
+      { threshold: 0.2 } // Lägre tröskel för att trigga animationer tidigare
     );
 
     sections.forEach((id) => {
@@ -76,6 +88,7 @@ const App = () => {
     };
   }, []);
 
+  // Array med tillgängliga animationstyper för slumpmässig tilldelning
   const animationTypes = [
     "subtle-fade-in-up",
     "fadeInLeft",
@@ -85,10 +98,24 @@ const App = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 font-sans">
+    <div className="min-h-screen bg-transparent text-gray-100 font-sans">
+      {/* Global Parallax Bakgrunds-div */}
+      {/* Denna div är fixerad och täcker hela skärmen, så den syns bakom alla sektioner */}
+      <div
+        className="fixed top-0 left-0 w-full h-full bg-center z-0"
+        style={{
+          backgroundImage: "url(assets/foresty.jpg)",
+          backgroundSize: "4912px 6449px", // Exempel på fast storlek
+          transform: `translateY(${parallaxOffset}px)`,
+        }}
+      />
+      {/* Överlagring för bakgrunden för att göra texten mer läsbar */}
+      <div className="fixed top-0 left-0 w-full h-full bg-black/40 z-10"></div>{" "}
+      {/* Justerad opacitet */}
       {/* Sidonavigering (Desktop) */}
-      <nav className="fixed top-0 left-0 h-full w-20 bg-gray-900/70 backdrop-blur-lg border-r border-white/10 shadow-lg z-50 hidden md:flex flex-col items-center justify-center py-8">
+      <nav className="fixed top-0 left-0 h-full w-20 bg-gray-900/40 backdrop-blur-lg border-r border-white/10 shadow-lg z-50 hidden md:flex flex-col items-center justify-center py-8">
         <ul className="space-y-8">
+          <p>menu</p>
           <li>
             <NavLink
               icon={<Home size={24} />}
@@ -136,9 +163,8 @@ const App = () => {
           </li>
         </ul>
       </nav>
-
       {/* NY Mobilmeny (Horisontell, fixerad längst ner) */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full h-16 bg-gray-900/80 backdrop-blur-lg border-t border-white/10 z-50">
+      <nav className="md:hidden fixed bottom-0 left-0 w-full h-16 bg-gray-900/40 backdrop-blur-lg border-t border-white/10 z-50">
         <ul className="flex justify-around items-center h-full">
           <li>
             <NavLink
@@ -192,36 +218,28 @@ const App = () => {
           </li>
         </ul>
       </nav>
-
       {/* Huvudinnehåll - med padding i botten för mobilmenyn */}
-      <main className="md:ml-20 pb-16 md:pb-0">
-        {/* Hem-sektion med parallax-bakgrund */}
+      <main className="relative z-20 md:ml-20 pb-16 md:pb-0">
+        {" "}
+        {/* z-20 för att innehållet ska ligga ovanför parallax-bakgrunden */}
+        {/* Hem-sektion */}
         <section
           id="home"
-          className="h-screen flex flex-col items-center justify-center text-center px-4 relative overflow-hidden"
+          className="h-screen flex flex-col items-center justify-center text-center px-4"
         >
-          {/* Parallax Bakgrunds-div med ny skogsbild */}
+          {/* Innehåll i hem-sektionen */}
           <div
-            className="absolute top-0 left-0 w-full h-[150vh] bg-cover bg-center z-0"
-            style={{
-              backgroundImage: "url(foresty.jpg)",
-              transform: `translateY(${parallaxOffset}px)`,
-              backgroundAttachment: "scroll",
-            }}
-          />
-          <div className="absolute top-0 left-0 w-full h-full bg-black/60 z-10"></div>
-
-          {/* Innehåll - Borttagen "blinkande" animation */}
-          <div
-            className="relative z-20 bg-black/40 p-8 rounded-xl shadow-2xl max-w-3xl"
+            className="bg-black/40 backdrop-blur-sm p-8 rounded-xl shadow-2xl max-w-3xl"
             data-animation="zoomIn"
           >
+            {" "}
+            {/* Justerad opacitet */}
             <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-500 mb-4">
               Hej, jag är Danny Gomez
             </h1>
             <p className="text-xl md:text-2xl text-gray-200 mb-8">
-              En passionerad fullstack utvecklare som bygger fantastiska
-              webbupplevelser.
+              En passionerad fullstack utvecklare som med en passion för
+              inveckling
             </p>
             <button
               onClick={() => handleNavLinkClick("projects")}
@@ -231,9 +249,13 @@ const App = () => {
             </button>
           </div>
         </section>
-
-        {/* Om Mig-sektion med solid bakgrund */}
-        <section id="about" className="py-24 px-4 md:px-10 bg-gray-800">
+        {/* Om Mig-sektion med semi-transparent bakgrund */}
+        <section
+          id="about"
+          className="py-24 px-4 backdrop-blur-sm md:px-10 bg-black/50"
+        >
+          {" "}
+          {/* Justerad opacitet */}
           <div className="max-w-4xl mx-auto">
             <h2
               className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500"
@@ -247,7 +269,7 @@ const App = () => {
                 data-animation="fadeInLeft"
               >
                 <img
-                  src="https://placehold.co/400x400/2d3748/a0aec0?text=Ditt+Foto"
+                  src="assets/danny300.jpg"
                   alt="Danny Gomez"
                   className="rounded-full w-64 h-64 object-cover mx-auto shadow-2xl border-4 border-emerald-500/50 transform hover:scale-105 transition-transform duration-300"
                 />
@@ -258,22 +280,26 @@ const App = () => {
                 data-stagger-index="1"
               >
                 <p className="mb-4">
-                  Jag är en fullstack utvecklare med X års erfarenhet av att
+                  Jag är en fullstack utvecklare med 20 års erfarenhet av att
                   utveckla responsiva och användarvänliga webbapplikationer. Min
                   passion ligger i att omvandla komplexa idéer till eleganta och
                   effektiva lösningar.
                 </p>
                 <p>
-                  Utöver kodning tycker jag om att vandra, läsa böcker och spela
-                  musik.
+                  Utöver kodning tycker jag om att cykla, måla tavlor och klappa
+                  djur av alla slag.
                 </p>
               </div>
             </div>
           </div>
         </section>
-
-        {/* Färdigheter-sektion med solid bakgrund */}
-        <section id="skills" className="py-24 px-4 md:px-10 bg-gray-900">
+        {/* Färdigheter-sektion med semi-transparent bakgrund */}
+        <section
+          id="skills"
+          className="py-24 px-4 md:px-10 bg-gray-900/80 backdrop-blur-xs"
+        >
+          {" "}
+          {/* Justerad opacitet */}
           <div className="max-w-4xl mx-auto">
             <h2
               className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-green-500"
@@ -283,18 +309,23 @@ const App = () => {
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
               {[
+                "C#",
+                "Java",
+                "Actionscript",
+                "Python",
+                "Photoshop",
+                "Illustrator",
+                "SQL",
+                "Entity Framework",
+                "MVC",
                 "React",
                 "JavaScript (ES6+)",
                 "HTML5",
                 "CSS3",
                 "Tailwind CSS",
-                "Node.js",
-                "Express.js",
-                "MongoDB",
-                "Git",
-                "Figma",
-                "Firebase",
-                "Next.js",
+                "Bootstrap",
+                "Arduino",
+                "ESP 32",
               ].map((skill, index) => {
                 const randomAnimation =
                   animationTypes[
@@ -312,9 +343,13 @@ const App = () => {
             </div>
           </div>
         </section>
-
-        {/* Projekt-sektion med solid bakgrund */}
-        <section id="projects" className="py-24 px-4 md:px-10 bg-gray-800">
+        {/* Projekt-sektion med semi-transparent bakgrund */}
+        <section
+          id="projects"
+          className="py-24 px-4 md:px-10 bg-gray-800/70 backdrop-blur-sm"
+        >
+          {" "}
+          {/* Justerad opacitet */}
           <div className="max-w-6xl mx-auto">
             <h2
               className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-purple-500"
@@ -324,14 +359,14 @@ const App = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               <ProjectCard
-                title="E-handelsplattform"
-                description="En fullstack e-handelsplattform med användarautentisering, produktkatalog och betalningsintegration."
-                technologies={["React", "Node.js", "MongoDB", "Stripe"]}
-                githubLink="https://github.com/GnomezHub/e-handel"
+                title="Munamii Cakery"
+                description="Ett bageri"
+                technologies={["React", "Tailwind css"]}
+                githubLink="https://github.com/GnomezHub/munamii"
                 liveLink="#"
-                image="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=2072&auto=format&fit=crop"
+                image="assets/munamii.png"
                 index={0}
-                animationType="softZoomInUp"
+                animationType="fadeInLeft"
               />
               <ProjectCard
                 title="Uppgiftshanterare"
@@ -341,7 +376,7 @@ const App = () => {
                 liveLink="#"
                 image="https://images.unsplash.com/photo-1547480053-7d174f67b557?q=80&w=2070&auto=format&fit=crop"
                 index={1}
-                animationType="softZoomInUp"
+                animationType="zoomIn"
               />
               <ProjectCard
                 title="Väderapplikation"
@@ -351,14 +386,15 @@ const App = () => {
                 liveLink="#"
                 image="https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=2070&auto=format&fit=crop"
                 index={2}
-                animationType="softZoomInUp"
+                animationType="fadeInRight"
               />
             </div>
           </div>
         </section>
-
-        {/* Kontakt-sektion med solid bakgrund */}
+        {/* Kontakt-sektion med semi-transparent bakgrund */}
         <section id="contact" className="py-24 px-4 md:px-10 bg-gray-900">
+          {" "}
+          {/* Justerad opacitet */}
           <div className="max-w-xl mx-auto text-center">
             <h2
               className="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500"
@@ -374,11 +410,19 @@ const App = () => {
               Har du ett spännande projekt eller vill du bara säga hej? Tveka
               inte att höra av dig!
             </p>
+            <p
+              className="text-lg text-gray-300 mb-8 text-left"
+              data-animation="subtle-fade-in-up"
+              data-stagger-index="1"
+            >
+              <ContactForm />
+            </p>
             <div
-              className="space-y-6"
+              className="space-y-6 mt-6"
               data-animation="subtle-fade-in-up"
               data-stagger-index="2"
             >
+              <p>...Eller på mail</p>
               <a
                 href="mailto:danny.gomez.mail@gmail.com"
                 className="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
@@ -406,7 +450,6 @@ const App = () => {
             </div>
           </div>
         </section>
-
         {/* Sidfot */}
         <footer className="py-8 text-center text-gray-500 text-sm bg-gray-900 border-t border-white/10">
           &copy; {new Date().getFullYear()} Danny Gomez. Alla rättigheter
@@ -459,6 +502,8 @@ const NavLink = ({
       className={`${desktopBase} ${isActive ? desktopActive : desktopInactive}`}
       aria-label={label}
     >
+      {" "}
+      {/* Fixade inactiveClasses här */}
       {icon}
       <span
         className={`absolute left-full ml-4 whitespace-nowrap bg-gray-700 text-white text-sm px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none`}
@@ -469,9 +514,14 @@ const NavLink = ({
   );
 };
 
+// --- Underkomponenter för Färdigheter och Projekt ---
+
+// Kort för färdigheter
+// Använder Lucide-ikonen "Code" för att representera färdigheter
+// Animationer tilldelas slumpmässigt från animationTypes-arrayen
 const SkillCard = ({ skill, index, animationType }) => (
   <div
-    className="bg-gray-800/60 p-6 rounded-lg shadow-lg flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300 ease-in-out border border-white/10 hover:border-emerald-500"
+    className="bg-gray-800/30 backdrop-blur-lg p-6 rounded-lg shadow-lg flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300 ease-in-out border border-white/10 hover:border-emerald-500"
     data-animation={animationType}
     data-stagger-index={index}
   >
@@ -480,6 +530,10 @@ const SkillCard = ({ skill, index, animationType }) => (
   </div>
 );
 
+// Kort för projekt
+// Innehåller titel, beskrivning, teknologier, länkar och bild
+// Använder Lucide-ikoner "Github" och "ExternalLink" för länkar
+// Animationer tilldelas slumpmässigt från animationTypes-arrayen
 const ProjectCard = ({
   title,
   description,
@@ -540,4 +594,4 @@ const ProjectCard = ({
   </div>
 );
 
-export default App;
+export default Otherapp;

@@ -12,11 +12,9 @@ import {
 } from "lucide-react";
 
 // Huvudkomponenten för portfolion
-const Other = () => {
+const App = () => {
   // State för att hantera aktiv sektion för navigering
   const [activeSection, setActiveSection] = useState("home");
-  // State för att hantera synlighet av mobilnavigering
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   // State för att hantera parallax-offset för bakgrunden
   const [parallaxOffset, setParallaxOffset] = useState(0);
 
@@ -25,9 +23,7 @@ const Other = () => {
   useEffect(() => {
     const handleScroll = () => {
       // Justera värdet (t.ex. 0.3 eller 0.7) för att ändra parallax-hastigheten.
-      // Ett högre värde (närmare 1) gör att bakgrunden rör sig mer med skrollen.
-      // Ett lägre värde (närmare 0) gör att bakgrunden rör sig mindre (mer "fixed").
-      setParallaxOffset(window.scrollY * 0.4); // Justerat till 0.4 för en märkbar men inte för snabb effekt
+      setParallaxOffset(window.scrollY * 0.5);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -40,7 +36,6 @@ const Other = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsMobileNavOpen(false); // Stänger mobilnavigeringen efter klick
   };
 
   // Effekt för att uppdatera aktiv sektion och trigga animationer vid skroll
@@ -51,26 +46,21 @@ const Other = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setActiveSection(entry.target.id);
-
-            // Hitta och animera element med 'data-animation' attributet inuti den synliga sektionen
             const animatableElements =
               entry.target.querySelectorAll("[data-animation]");
             animatableElements.forEach((el) => {
               const animationType = el.dataset.animation;
               el.classList.add(`animate-${animationType}`);
-              // Om det är ett "staggered" element, applicera fördröjning
-              if (el.dataset.staggerIndex !== undefined) {
+              if (el.dataset.staggerIndex) {
                 el.style.animationDelay = `${
                   parseInt(el.dataset.staggerIndex) * 150
                 }ms`;
               }
             });
           }
-          // Animationen spelas bara en gång när elementet kommer in i vyn,
-          // och förblir i sitt animerade (synliga) tillstånd.
         });
       },
-      { threshold: 0.2 } // Lägre tröskel för att trigga animationer tidigare
+      { rootMargin: "-50% 0px -50% 0px" } // Mer centrerad triggerpunkt
     );
 
     sections.forEach((id) => {
@@ -86,7 +76,6 @@ const Other = () => {
     };
   }, []);
 
-  // Array med tillgängliga animationstyper för slumpmässig tilldelning
   const animationTypes = [
     "subtle-fade-in-up",
     "fadeInLeft",
@@ -96,75 +85,12 @@ const Other = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-transparent text-gray-100 font-sans">
-      {" "}
-      {/* Ändrad till bg-transparent */}
-      {/* Anpassade CSS-animationer */}
-      <style>
-        {`
-        @keyframes subtleFadeInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn { /* Added for general fade-in, not used directly by data-animation but good to have */
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes fadeInLeft {
-          from { opacity: 0; transform: translateX(-50px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fadeInRight {
-          from { opacity: 0; transform: translateX(50px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes zoomIn {
-          from { opacity: 0; transform: scale(0.9); }
-          to { opacity: 1; transform: scale(1); }
-        }
-        @keyframes softZoomInUp {
-          from { opacity: 0; transform: translateY(20px) scale(0.95); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* Initialt tillstånd för element som ska animeras */
-        [data-animation] {
-          opacity: 0;
-        }
-        
-        /* Animationsklasser */
-        .animate-subtle-fade-in-up,
-        .animate-fadeInLeft,
-        .animate-fadeInRight,
-        .animate-zoomIn,
-        .animate-softZoomInUp {
-          animation-fill-mode: both;
-          animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Mjukare easing */
-        }
-        .animate-subtle-fade-in-up { animation-name: subtleFadeInUp; animation-duration: 0.9s; }
-        .animate-fadeIn { animation-name: fadeIn; animation-duration: 0.7s; } /* Added for general fade-in */
-        .animate-fadeInLeft { animation-name: fadeInLeft; animation-duration: 1s; }
-        .animate-fadeInRight { animation-name: fadeInRight; animation-duration: 1s; }
-        .animate-zoomIn { animation-name: zoomIn; animation-duration: 0.8s; }
-        .animate-softZoomInUp { animation-name: softZoomInUp; animation-duration: 1s; }
-        `}
-      </style>
-      {/* Global Parallax Bakgrunds-div */}
-      {/* Denna div är fixerad och täcker hela skärmen, så den syns bakom alla sektioner */}
-      <div
-        className="fixed top-0 left-0 w-full h-full bg-cover bg-center z-0"
-        style={{
-          backgroundImage:
-            "url(https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2070&auto=format&fit=crop)", // Ny skogsbild
-          transform: `translateY(${parallaxOffset}px)`,
-          // backgroundAttachment: 'scroll' är inte nödvändigt här eftersom den är fixed och vi styr translateY
-        }}
-      />
-      {/* Överlagring för bakgrunden för att göra texten mer läsbar */}
-      <div className="fixed top-0 left-0 w-full h-full bg-black/40 z-10"></div>{" "}
-      {/* Justerad opacitet */}
+    <div className="min-h-screen bg-gray-900/10 text-gray-100 font-sans">
       {/* Sidonavigering (Desktop) */}
-      <nav className="fixed top-0 left-0 h-full w-20 bg-gray-900/70 backdrop-blur-lg border-r border-white/10 shadow-lg z-50 hidden md:flex flex-col items-center justify-center py-8">
+      <nav
+        className="fixed top-0 left-0 h-full w-20 bg-gray-900/80
+       backdrop-blur-lg border-r border-white/10 shadow-lg z-50 hidden md:flex flex-col items-center justify-center py-8"
+      >
         <ul className="space-y-8">
           <li>
             <NavLink
@@ -213,8 +139,9 @@ const Other = () => {
           </li>
         </ul>
       </nav>
+
       {/* NY Mobilmeny (Horisontell, fixerad längst ner) */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full h-16 bg-gray-900/80 backdrop-blur-lg border-t border-white/10 z-50">
+      <nav className="md:hidden fixed bottom-0 left-0 w-full h-16 bg-gray-900/10 backdrop-blur-lg border-t border-white/20 z-50">
         <ul className="flex justify-around items-center h-full">
           <li>
             <NavLink
@@ -268,28 +195,34 @@ const Other = () => {
           </li>
         </ul>
       </nav>
+
       {/* Huvudinnehåll - med padding i botten för mobilmenyn */}
-      <main className="relative z-20 md:ml-20 pb-16 md:pb-0">
-        {" "}
-        {/* z-20 för att innehållet ska ligga ovanför parallax-bakgrunden */}
-        {/* Hem-sektion */}
+      <main className="md:ml-20 pb-16 md:pb-0">
+        {/* Hem-sektion med parallax-bakgrund */}
         <section
           id="home"
-          className="h-screen flex flex-col items-center justify-center text-center px-4"
+          className="h-screen flex flex-col items-center justify-center text-center px-4 relative overflow-hidden"
         >
-          {/* Innehåll i hem-sektionen */}
+          {/* Parallax Bakgrunds-div med ny skogsbild */}
           <div
-            className="bg-black/30 p-8 rounded-xl shadow-2xl max-w-3xl"
+            className="absolute top-0 left-0 w-full h-[150vh] bg-cover bg-center z-0"
+            style={{
+              backgroundImage: "url(foresty.jpg)",
+              transform: `translateY(${parallaxOffset}px)`,
+              backgroundAttachment: "scroll",
+            }}
+          />
+          <div className="absolute top-0 left-0 w-full h-full bg-black/20 z-10"></div>
+
+          <div
+            className="relative z-20 bg-black/60 p-8 rounded-xl shadow-2xl max-w-3xl"
             data-animation="zoomIn"
           >
-            {" "}
-            {/* Justerad opacitet */}
             <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-500 mb-4">
               Hej, jag är Danny Gomez
             </h1>
             <p className="text-xl md:text-2xl text-gray-200 mb-8">
-              En passionerad fullstack utvecklare som bygger fantastiska
-              webbupplevelser.
+              En fullstack utvecklare med passion för inveckling.
             </p>
             <button
               onClick={() => handleNavLinkClick("projects")}
@@ -299,10 +232,12 @@ const Other = () => {
             </button>
           </div>
         </section>
-        {/* Om Mig-sektion med semi-transparent bakgrund */}
-        <section id="about" className="py-24 px-4 md:px-10 bg-gray-800/70">
-          {" "}
-          {/* Justerad opacitet */}
+
+        {/* Om Mig-sektion med solid bakgrund */}
+        <section
+          id="about"
+          className="py-24 px-4 md:px-10 bg-gray-800/40 bg-opacity-50"
+        >
           <div className="max-w-4xl mx-auto">
             <h2
               className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500"
@@ -340,10 +275,9 @@ const Other = () => {
             </div>
           </div>
         </section>
-        {/* Färdigheter-sektion med semi-transparent bakgrund */}
-        <section id="skills" className="py-24 px-4 md:px-10 bg-gray-900/70">
-          {" "}
-          {/* Justerad opacitet */}
+
+        {/* Färdigheter-sektion med solid bakgrund */}
+        <section id="skills" className="py-24 px-4 md:px-10 bg-gray-900">
           <div className="max-w-4xl mx-auto">
             <h2
               className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-green-500"
@@ -382,10 +316,9 @@ const Other = () => {
             </div>
           </div>
         </section>
-        {/* Projekt-sektion med semi-transparent bakgrund */}
-        <section id="projects" className="py-24 px-4 md:px-10 bg-gray-800/70">
-          {" "}
-          {/* Justerad opacitet */}
+
+        {/* Projekt-sektion med solid bakgrund */}
+        <section id="projects" className="py-24 px-4 md:px-10 bg-gray-800">
           <div className="max-w-6xl mx-auto">
             <h2
               className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-purple-500"
@@ -402,7 +335,7 @@ const Other = () => {
                 liveLink="#"
                 image="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=2072&auto=format&fit=crop"
                 index={0}
-                animationType="fadeInLeft"
+                animationType="softZoomInUp"
               />
               <ProjectCard
                 title="Uppgiftshanterare"
@@ -412,7 +345,7 @@ const Other = () => {
                 liveLink="#"
                 image="https://images.unsplash.com/photo-1547480053-7d174f67b557?q=80&w=2070&auto=format&fit=crop"
                 index={1}
-                animationType="zoomIn"
+                animationType="softZoomInUp"
               />
               <ProjectCard
                 title="Väderapplikation"
@@ -422,15 +355,14 @@ const Other = () => {
                 liveLink="#"
                 image="https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=2070&auto=format&fit=crop"
                 index={2}
-                animationType="fadeInRight"
+                animationType="softZoomInUp"
               />
             </div>
           </div>
         </section>
-        {/* Kontakt-sektion med semi-transparent bakgrund */}
-        <section id="contact" className="py-24 px-4 md:px-10 bg-gray-900/80">
-          {" "}
-          {/* Justerad opacitet */}
+
+        {/* Kontakt-sektion med solid bakgrund */}
+        <section id="contact" className="py-24 px-4 md:px-10 bg-gray-900">
           <div className="max-w-xl mx-auto text-center">
             <h2
               className="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500"
@@ -478,6 +410,7 @@ const Other = () => {
             </div>
           </div>
         </section>
+
         {/* Sidfot */}
         <footer className="py-8 text-center text-gray-500 text-sm bg-gray-900 border-t border-white/10">
           &copy; {new Date().getFullYear()} Danny Gomez. Alla rättigheter
@@ -530,8 +463,6 @@ const NavLink = ({
       className={`${desktopBase} ${isActive ? desktopActive : desktopInactive}`}
       aria-label={label}
     >
-      {" "}
-      {/* Fixade inactiveClasses här */}
       {icon}
       <span
         className={`absolute left-full ml-4 whitespace-nowrap bg-gray-700 text-white text-sm px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none`}
@@ -613,4 +544,4 @@ const ProjectCard = ({
   </div>
 );
 
-export default Other;
+export default App;

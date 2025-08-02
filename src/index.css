@@ -1,4 +1,7 @@
 @import "tailwindcss";
+body {
+  background-color: black; /* Replace 'lightblue' with your desired color */
+}
 @keyframes subtleFadeInUp {
   from {
     opacity: 0;
@@ -7,6 +10,15 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  /* Added for general fade-in, not used directly by data-animation but good to have */
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 @keyframes fadeInLeft {
@@ -62,12 +74,21 @@
 .animate-zoomIn,
 .animate-softZoomInUp {
   animation-fill-mode: both;
-  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-timing-function: cubic-bezier(
+    0.25,
+    0.46,
+    0.45,
+    0.94
+  ); /* Mjukare easing */
 }
 .animate-subtle-fade-in-up {
   animation-name: subtleFadeInUp;
   animation-duration: 0.9s;
 }
+.animate-fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 0.7s;
+} /* Added for general fade-in */
 .animate-fadeInLeft {
   animation-name: fadeInLeft;
   animation-duration: 1s;
