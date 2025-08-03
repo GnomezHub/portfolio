@@ -1,15 +1,3 @@
-// import {
-//   Home,
-//   User,
-//   Code,
-//   Briefcase,
-//   Mail,
-//   Github,
-//   Linkedin,
-//   X,
-//   ExternalLink,
-// } from "lucide-react";
-
 export default function NavLink({
   icon,
   label,
