@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 
 import ContactForm from "./components/ContactForm";
+import Eye from "./components/Eye";
+import NavLink from "./components/NavLink";
 
 // Huvudkomponenten för portfolion
 const Otherapp = () => {
@@ -42,7 +44,6 @@ const Otherapp = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    // setIsMobileNavOpen(false); // Stänger mobilnavigeringen efter klick
   };
 
   // Effekt för att uppdatera aktiv sektion och trigga animationer vid skroll
@@ -98,24 +99,26 @@ const Otherapp = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-transparent text-gray-100 font-sans">
+    <div className="min-h-full bg-transparent text-gray-100 font-sans">
       {/* Global Parallax Bakgrunds-div */}
       {/* Denna div är fixerad och täcker hela skärmen, så den syns bakom alla sektioner */}
       <div
-        className="fixed top-0 left-0 w-full h-full bg-center z-0"
+        className="fixed top-0 left-0 w-2000 h-2626 bg-center z-0"
         style={{
-          backgroundImage: "url(assets/foresty.jpg)",
-          backgroundSize: "4912px 6449px", // Exempel på fast storlek
+          backgroundImage: "url(assets/foresty_2000_2626.jpg)",
+          //  backgroundSize: "2000px 2626px", // Exempel på fast storlek
           transform: `translateY(${parallaxOffset}px)`,
         }}
       />
       {/* Överlagring för bakgrunden för att göra texten mer läsbar */}
-      <div className="fixed top-0 left-0 w-full h-full bg-black/40 z-10"></div>{" "}
-      {/* Justerad opacitet */}
-      {/* Sidonavigering (Desktop) */}
+      <div className="fixed top-0 left-0 w-full h-full bg-black/40 z-10"></div>
+      {/* Sidonavigering (Desktop)
+      yellow-400
+      */}
       <nav className="fixed top-0 left-0 h-full w-20 bg-gray-900/40 backdrop-blur-lg border-r border-white/10 shadow-lg z-50 hidden md:flex flex-col items-center justify-center py-8">
         <ul className="space-y-8">
-          <p>menu</p>
+          <Eye />
+
           <li>
             <NavLink
               icon={<Home size={24} />}
@@ -363,7 +366,7 @@ const Otherapp = () => {
                 description="Ett bageri"
                 technologies={["React", "Tailwind css"]}
                 githubLink="https://github.com/GnomezHub/munamii"
-                liveLink="#"
+                liveLink="https://munamiii.netlify.app"
                 image="assets/munamii.png"
                 index={0}
                 animationType="fadeInLeft"
@@ -410,13 +413,9 @@ const Otherapp = () => {
               Har du ett spännande projekt eller vill du bara säga hej? Tveka
               inte att höra av dig!
             </p>
-            <p
-              className="text-lg text-gray-300 mb-8 text-left"
-              data-animation="subtle-fade-in-up"
-              data-stagger-index="1"
-            >
-              <ContactForm />
-            </p>
+
+            <ContactForm />
+
             <div
               className="space-y-6 mt-6"
               data-animation="subtle-fade-in-up"
@@ -460,59 +459,6 @@ const Otherapp = () => {
   );
 };
 
-// --- Underkomponenter ---
-
-const NavLink = ({
-  icon,
-  label,
-  sectionId,
-  activeSection,
-  onClick,
-  isMobile = false,
-}) => {
-  const isActive = activeSection === sectionId;
-
-  // Klasser för Desktop (vänster sida)
-  const desktopBase =
-    "flex items-center justify-center p-3 rounded-full transition-all duration-300 ease-in-out group";
-  const desktopActive = "bg-emerald-600 text-white shadow-lg";
-  const desktopInactive = "text-gray-400 hover:bg-gray-700 hover:text-white";
-
-  // Klasser för Mobil (botten)
-  const mobileBase =
-    "flex flex-col items-center justify-center gap-1 transition-all duration-200 ease-in-out transform";
-  const mobileActive = "text-emerald-400 scale-110";
-  const mobileInactive = "text-gray-400 hover:text-white";
-
-  if (isMobile) {
-    return (
-      <button
-        onClick={() => onClick(sectionId)}
-        className={`${mobileBase} ${isActive ? mobileActive : mobileInactive}`}
-        aria-label={label}
-      >
-        {icon}
-      </button>
-    );
-  }
-
-  return (
-    <button
-      onClick={() => onClick(sectionId)}
-      className={`${desktopBase} ${isActive ? desktopActive : desktopInactive}`}
-      aria-label={label}
-    >
-      {" "}
-      {/* Fixade inactiveClasses här */}
-      {icon}
-      <span
-        className={`absolute left-full ml-4 whitespace-nowrap bg-gray-700 text-white text-sm px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none`}
-      >
-        {label}
-      </span>
-    </button>
-  );
-};
 
 // --- Underkomponenter för Färdigheter och Projekt ---
 
