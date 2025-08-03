@@ -51,7 +51,7 @@ export default function ContactForm() {
         onSubmit={handleSubmit}
       >
         <input type="hidden" name="form-name" value="contact" />
-        <p>
+        <p className="my-4">
           <label htmlFor="yourname">Your Name:</label> <br />
           <input
             type="text"
@@ -62,7 +62,7 @@ export default function ContactForm() {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
         </p>
-        <p>
+        <p className="my-4">
           <label htmlFor="youremail">Your Email:</label> <br />
           <input
             type="email"
@@ -73,7 +73,7 @@ export default function ContactForm() {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
         </p>
-        <p>
+        <p className="my-4">
           <label htmlFor="yourmessage">Message:</label> <br />
           <textarea
             name="message"
@@ -83,7 +83,7 @@ export default function ContactForm() {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           ></textarea>
         </p>
-        <p className="text-right p-4">
+        <p className="text-right">
           <button
             type="submit"
             disabled={isSubmitting}

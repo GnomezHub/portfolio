@@ -112,12 +112,12 @@ const Otherapp = () => {
       />
       {/* Överlagring för bakgrunden för att göra texten mer läsbar */}
       <div className="fixed top-0 left-0 w-full h-full bg-black/40 z-10"></div>
-      {/* Sidonavigering (Desktop)
-      yellow-400
-      */}
+
       <nav className="fixed top-0 left-0 h-full w-20 bg-gray-900/40 backdrop-blur-lg border-r border-white/10 shadow-lg z-50 hidden md:flex flex-col items-center justify-center py-8">
         <ul className="space-y-8">
-          <Eye />
+          <li>
+            <Eye />
+          </li>
 
           <li>
             <NavLink
@@ -232,7 +232,7 @@ const Otherapp = () => {
         >
           {/* Innehåll i hem-sektionen */}
           <div
-            className="bg-black/40 backdrop-blur-sm p-8 rounded-xl shadow-2xl max-w-3xl"
+            className="bg-black/40 backdrop-blur-sm p-8 rounded-xl shadow-2xl max-w-3xl border-2  border-white/10"
             data-animation="zoomIn"
           >
             {" "}
@@ -258,10 +258,9 @@ const Otherapp = () => {
           className="py-24 px-4 backdrop-blur-sm md:px-10 bg-black/50"
         >
           {" "}
-          {/* Justerad opacitet */}
           <div className="max-w-4xl mx-auto">
             <h2
-              className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500"
+              className="text-4xl font-bold text-center mb-16 text-amber-500 " //text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500"
               data-animation="subtle-fade-in-up"
             >
               Om Mig
@@ -299,13 +298,11 @@ const Otherapp = () => {
         {/* Färdigheter-sektion med semi-transparent bakgrund */}
         <section
           id="skills"
-          className="py-24 px-4 md:px-10 bg-gray-900/80 backdrop-blur-xs"
+          className="py-24 px-4 md:px-10 bg-gray-900/85" // backdrop-blur-xs"
         >
-          {" "}
-          {/* Justerad opacitet */}
           <div className="max-w-4xl mx-auto">
             <h2
-              className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-green-500"
+              className="text-4xl font-bold text-center mb-16 text-lime-500" //text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-green-500"
               data-animation="subtle-fade-in-up"
             >
               Mina Färdigheter
@@ -355,7 +352,7 @@ const Otherapp = () => {
           {/* Justerad opacitet */}
           <div className="max-w-6xl mx-auto">
             <h2
-              className="text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-purple-500"
+              className="text-4xl font-bold text-center mb-16 text-fuchsia-600" //text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-purple-500"
               data-animation="subtle-fade-in-up"
             >
               Mina Projekt
@@ -400,7 +397,7 @@ const Otherapp = () => {
           {/* Justerad opacitet */}
           <div className="max-w-xl mx-auto text-center">
             <h2
-              className="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500"
+              className="text-4xl font-bold mb-8 text-indigo-600" //text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500"
               data-animation="subtle-fade-in-up"
             >
               Kontakta Mig
@@ -459,7 +456,6 @@ const Otherapp = () => {
   );
 };
 
-
 // --- Underkomponenter för Färdigheter och Projekt ---
 
 // Kort för färdigheter
@@ -467,7 +463,7 @@ const Otherapp = () => {
 // Animationer tilldelas slumpmässigt från animationTypes-arrayen
 const SkillCard = ({ skill, index, animationType }) => (
   <div
-    className="bg-gray-800/30 backdrop-blur-lg p-6 rounded-lg shadow-lg flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300 ease-in-out border border-white/10 hover:border-emerald-500"
+    className="bg-gray-800/30 p-6 rounded-lg shadow-lg flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300 ease-in-out border border-white/10 hover:border-emerald-500"
     data-animation={animationType}
     data-stagger-index={index}
   >
