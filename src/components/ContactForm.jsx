@@ -52,7 +52,7 @@ export default function ContactForm() {
       >
         <input type="hidden" name="form-name" value="contact" />
         <p className="my-4">
-          <label htmlFor="yourname">Your Name:</label> <br />
+          <label htmlFor="yourname">Ditt namn:</label> <br />
           <input
             type="text"
             name="name"
@@ -63,7 +63,7 @@ export default function ContactForm() {
           />
         </p>
         <p className="my-4">
-          <label htmlFor="youremail">Your Email:</label> <br />
+          <label htmlFor="youremail">Din email:</label> <br />
           <input
             type="email"
             name="email"
@@ -74,7 +74,7 @@ export default function ContactForm() {
           />
         </p>
         <p className="my-4">
-          <label htmlFor="yourmessage">Message:</label> <br />
+          <label htmlFor="yourmessage">Meddelande:</label> <br />
           <textarea
             name="message"
             id="yourmessage"
@@ -93,11 +93,13 @@ export default function ContactForm() {
           </button>
         </p>
         {success && (
-          <p className="text-green-600">Thank you! Your message was sent.</p>
+          <p className="text-green-600">
+            Tackar tackar! Ditt meddelande har skickats.
+          </p>
         )}
         {error && (
           <p className="text-red-600">
-            Something went wrong. Please try again.
+            Nånting gick snett. Var god försök igen.
           </p>
         )}
       </form>
