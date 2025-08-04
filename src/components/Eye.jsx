@@ -80,14 +80,14 @@ export default function Eye() {
   useEffect(() => {
     const handleBlink = () => {
       setIsBlinking(true);
-      const closedTime = Math.random() * 500 + 100;
+      const closedTime = Math.random() * 500 + 50;
       setTimeout(() => {
         setIsBlinking(false);
       }, closedTime);
     };
 
     const scheduleNextBlink = () => {
-      const opendTime = Math.random() * 3000 + 3000;
+      const opendTime = Math.random() * 4000 + 3000;
       const timeout = setTimeout(() => {
         handleBlink();
         scheduleNextBlink();
