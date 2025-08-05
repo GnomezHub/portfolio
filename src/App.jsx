@@ -5,6 +5,7 @@ import {
   Code,
   Briefcase,
   Mail,
+  Brain,
   Github,
   Linkedin,
   X,
@@ -46,7 +47,6 @@ const App = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-
 
   // Effekt för att uppdatera aktiv sektion och trigga animationer vid skroll
   useEffect(() => {
@@ -91,8 +91,6 @@ const App = () => {
     };
   }, []);
 
-
-
   // Array med tillgängliga animationstyper för slumpmässig tilldelning
   const animationTypes = [
     "subtle-fade-in-up",
@@ -117,7 +115,10 @@ const App = () => {
       {/* Överlagring för bakgrunden för att göra texten mer läsbar */}
       <div className="fixed top-0 left-0 w-full h-full bg-black/40 z-10"></div>
 
-      <nav className="fixed top-0 left-0 h-full w-20 bg-gray-900/40 backdrop-blur-lg border-r border-white/10 shadow-lg z-50 hidden md:flex flex-col items-center justify-center py-8">
+      <nav
+        className="fixed top-0 left-0 h-full w-20 bg-gray-900/40 
+       backdrop-blur-xs border-r border-white/10 shadow-lg z-50 hidden md:flex flex-col items-center justify-center py-8"
+      >
         <ul className="space-y-8">
           <li>
             <Eye />
@@ -143,7 +144,7 @@ const App = () => {
           </li>
           <li>
             <NavLink
-              icon={<Code size={24} />}
+              icon={<Brain size={24} />}
               label="Färdigheter"
               sectionId="skills"
               activeSection={activeSection}
@@ -171,11 +172,11 @@ const App = () => {
         </ul>
       </nav>
       {/* NY Mobilmeny (Horisontell, fixerad längst ner) */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full h-16 bg-gray-900/40 backdrop-blur-lg border-t-2 border-white/10 z-50">
-        <ul className="flex justify-around items-center h-full">
-          <li>
-            <Eye />
-          </li>
+      <nav
+        className="md:hidden fixed bottom-0 left-0 w-full h-16
+       bg-gray-900/60 backdrop-blur-xs border-t-2 border-white/10 z-50"
+      >
+        <ul className="flex justify-around items-center h-full mx-0">
           <li>
             <NavLink
               icon={<Home size={26} />}
@@ -198,7 +199,7 @@ const App = () => {
           </li>
           <li>
             <NavLink
-              icon={<Code size={26} />}
+              icon={<Brain size={26} />}
               label="Färdigheter"
               sectionId="skills"
               activeSection={activeSection}
@@ -229,12 +230,14 @@ const App = () => {
         </ul>
       </nav>
       {/* Huvudinnehåll - med padding i botten för mobilmenyn */}
-     <MainContent animationTypes={animationTypes} onNavLinkClick={handleNavLinkClick} /> 
+      <MainContent
+        animationTypes={animationTypes}
+        onNavLinkClick={handleNavLinkClick}
+      />
     </div>
   );
 };
 
 // --- Underkomponenter för Färdigheter och Projekt ---
-
 
 export default App;

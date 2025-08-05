@@ -13,6 +13,7 @@ export default function ProjectCard({
   image,
   index,
   animationType,
+  
 }) {
   return (
     <div
@@ -31,8 +32,8 @@ export default function ProjectCard({
         }}
       />
       <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-2xl font-bold text-white mb-3">{title}</h3>
-        <p className="text-gray-300 text-base mb-4 flex-grow">{description}</p>
+        <h3 className="text-2xl font-bold font-heading text-white mb-3">{title}</h3>
+        <p className="text-gray-300 text-body mb-4 flex-grow">{description}</p>
         <div className="flex flex-wrap gap-2 mb-5">
           {technologies.map((tech, idx) => (
             <span
@@ -44,22 +45,27 @@ export default function ProjectCard({
           ))}
         </div>
         <div className="flex justify-between items-center mt-auto pt-4 border-t border-white/10">
-          <a
-            href={githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-emerald-400 hover:text-emerald-300 font-semibold transition-colors duration-200"
-          >
-            <Github size={20} className="mr-2" /> GitHub
-          </a>
-          <a
-            href={liveLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-teal-400 hover:text-teal-300 font-semibold transition-colors duration-200"
-          >
-            Live Demo <ExternalLink size={16} className="ml-2" />
-          </a>
+          {githubLink != "" && (
+            <a
+              href={githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-emerald-400 hover:text-emerald-300 font-semibold transition-colors duration-200"
+            >
+              <Github size={20} className="mr-2" /> GitHub
+            </a>
+          )}
+
+          {liveLink != "" && (
+            <a
+              href={liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-teal-400 hover:text-teal-300 font-semibold transition-colors duration-200"
+            >
+              Live Demo <ExternalLink size={16} className="ml-2" />
+            </a>
+          )}
         </div>
       </div>
     </div>

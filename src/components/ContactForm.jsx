@@ -59,8 +59,7 @@ export default function ContactForm() {
             id="yourname"
             value={formData.name}
             onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          />
+            className="bg-emerald-100 text-gray-900 text-md  rounded-lg focus:bg-amber-100 w-full p-2"          />
         </p>
         <p className="my-4">
           <label htmlFor="youremail">Din email:</label> <br />
@@ -70,7 +69,7 @@ export default function ContactForm() {
             id="youremail"
             value={formData.email}
             onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="bg-emerald-100 text-gray-900 text-md  rounded-lg focus:bg-amber-100 w-full p-2"
           />
         </p>
         <p className="my-4">
@@ -78,9 +77,10 @@ export default function ContactForm() {
           <textarea
             name="message"
             id="yourmessage"
+            placeholder="Imponerande portfolio, vill du arbeta med oss?"
             value={formData.message}
             onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="bg-emerald-100 text-gray-900 text-md  rounded-lg focus:bg-amber-100 w-full p-2"
           ></textarea>
         </p>
         <p className="text-right">
@@ -89,7 +89,7 @@ export default function ContactForm() {
             disabled={isSubmitting}
             className="text-right inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
           >
-            {isSubmitting ? "Sending..." : "Send"}
+            {isSubmitting ? "Skickar..." : "Skicka"}
           </button>
         </p>
         {success && (

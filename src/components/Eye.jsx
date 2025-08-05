@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+
+
 const EyeOpenSVG = ({ className }) => (
   // SVG-koden från ditt felmeddelande.
   <svg
@@ -76,7 +78,7 @@ const EyeClosedSVG = ({ className }) => (
 export default function Eye() {
   // Skapar ett state för att hålla reda på om ögat blinkar (är stängt)
   const [isBlinking, setIsBlinking] = useState(false);
-
+  const [isMouseDown, setIsMouseDown] = useState(false);
   useEffect(() => {
     const handleBlink = () => {
       setIsBlinking(true);
@@ -101,9 +103,14 @@ export default function Eye() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center">
-      {/* Renderar antingen det öppna eller det stängda ögat baserat på state */}
-      {isBlinking ? (
+
+    <div className="flex flex-col items-center hover:scale-190 transition-all ease-in-out duration-500"
+      onMouseDown={() => setIsMouseDown(true)}
+  onMouseUp={() => setIsMouseDown(false)}
+    >
+      {/* Renderar antingen det öppna eller det stängda ögat baserat på state (eller mustryck)*/}
+
+      {isBlinking || isMouseDown  ? (
         <EyeClosedSVG className="w-10 h-10" />
       ) : (
         <EyeOpenSVG className="w-10 h-10" />

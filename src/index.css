@@ -2,6 +2,15 @@
 body {
   background-color: black; /* Replace 'lightblue' with your desired color */
 }
+
+.font-heading {
+  font-family: "Montserrat", "Lato", sans-serif;
+}
+
+.font-body {
+  font-family: "Lato", "Inter", sans-serif;
+}
+
 @keyframes subtleFadeInUp {
   from {
     opacity: 0;

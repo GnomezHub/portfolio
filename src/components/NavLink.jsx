@@ -13,7 +13,7 @@ export default function NavLink({
     "flex items-center justify-center rounded-full transition-all duration-300 ease-in-out group"; //" focus:outline focus:border-dotted focus:border-yellow-400";
   const desktopActive = "p-2 m-1 bg-emerald-600 text-white shadow-lg";
   const desktopInactive =
-    " p-3 text-gray-400 hover:bg-gray-700 hover:text-white";
+    " p-3 text-gray-400 hover:bg-gray-700 hover:text-white cursor-pointer";
 
   // Klasser för Mobil (botten)
   const mobileBase =
