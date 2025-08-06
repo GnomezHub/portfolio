@@ -1,5 +1,7 @@
 import ProjectCard from "./ProjectCard";
 import ContactForm from "./ContactForm";
+import Eye from "./Eye";
+
 import {
   Home,
   User,
@@ -12,44 +14,62 @@ import {
   ExternalLink,
 } from "lucide-react";
 
-export default function MainContent({ animationTypes, onNavLinkClick }) {
+export default function MainContent() {
+  // Array med tillgängliga animationstyper för slumpmässig tilldelning
+  const animationTypes = [
+    "subtle-fade-in-up",
+    "fadeInLeft",
+    "fadeInRight",
+    "zoomIn",
+    "softZoomInUp",
+  ];
+
   return (
-    <main className="relative z-20 md:ml-20 pb-16 md:pb-0">
+    <main className="relative z-20 md:pl-0 pb-16 md:pb-0 scroll-smooth">
       {" "}
       {/* z-20 för att innehållet ska ligga ovanför parallax-bakgrunden */}
       {/* Hem-sektion */}
       <section
         id="home"
-        className="h-screen flex flex-col items-center justify-center text-center px-4"
+        className=" px-6 md:pl-26 h-screen flex flex-col items-center justify-center text-center"
       >
         {/* Innehåll i hem-sektionen */}
         <div
-          className="bg-black/40 backdrop-blur-xs p-8 rounded-xl shadow-2xl max-w-3xl border-2  border-white/10"
+          className="bg-black/50 backdrop-bluur-xs p-8 rounded-xl shadow-2xl max-w-3xl border-2  border-white/10"
           data-animation="zoomIn"
         >
-          {" "}
-          {/* Justerad opacitet */}
-          <h1 className="text-4xl font-heading md:text-7xl font-extrabold text-lime-600 ">
+          <h1 className="text-4xl font-heading md:text-6xl font-extrabold text-lime-600 ">
             {/*text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-500 mb-4"> */}
             Hej, jag är Danny Gomez
           </h1>
-          <p className="text-xl md:text-2xl font-heading text-gray-200 mb-8">
-            En kreativ fullstack-utvecklare.
+          <img
+            src="assets/skulptur_matt.png"
+            alt="sculpture"
+            className="w-30 mx-auto py-6"
+            data-animation="softZoomInUp"
+            data-stagger-index={0}
+          />
+
+          <p
+            data-animation="fadeInRight"
+            data-stagger-index={2}
+            className="text-xl md:text-2xl font-heading text-gray-200 mb-8"
+          >
+            En skogstokig fullstack-utvecklare med konstnärliga drag
           </p>
-          <button
+          {/* <button
             onClick={() => onNavLinkClick("projects")}
             //className="bg-emerald-600  hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
-
             className="bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
           >
             Mina Projekt
-          </button>
+          </button> */}
         </div>
       </section>
       {/* Om Mig-sektion med semi-transparent bakgrund */}
       <section
         id="about"
-        className="py-24 px-4 md:px-10 bg-gray-900/80 border-t-2 border-amber-100/10"
+        className="py-24 px-6 md:pl-26 bg-gray-900/80 border-t-2 border-amber-100/10"
       >
         <div className="relative max-w-4xl mx-auto">
           {/* <img
@@ -64,7 +84,7 @@ export default function MainContent({ animationTypes, onNavLinkClick }) {
           >
             Om Mig
           </h2>
-          <div className="flex flex-col md:flex-row items-center md:space-x-12">
+          <div className="mb-16 flex flex-col md:flex-row items-center md:space-x-8">
             {/* */}
             <div className="md:w-1/3 mb-8 md:mb-0" data-animation="fadeInLeft">
               <img
@@ -96,14 +116,16 @@ export default function MainContent({ animationTypes, onNavLinkClick }) {
               </p>
             </div>
           </div>
+          <Eye className="w-20 h-20" />
+          {/* <img src="assets/skulptur_glansig.png" alt="sculpture" className="w-50 mx-auto py-6" /> */}
         </div>
       </section>
       {/* Färdigheter-sektion med semi-transparent bakgrund */}
       <section
         id="skills"
-        className="py-24 px-4 md:px-10 border-t border-white/10 bg-gray-900/60 backdrop-blur-xs"
+        className="py-24 px-4 md:pl-24 border-t border-white/10 bg-gray-900/60 backdrop-blur-xs"
       >
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <Brain size="60" className="mx-auto mb-8 text-lime-600 " />
           <h2
             className="text-4xl text-center font-heading font-bold mb-22 text-lime-500" //text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-green-500"
@@ -111,17 +133,18 @@ export default function MainContent({ animationTypes, onNavLinkClick }) {
           >
             Mina Skills
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
             {[
               "C#",
               "Java",
-              "Actionscript",
+              "VB Script",
               "Python",
+              "3D Studio Max",
               "Adobe Photoshop",
               "Adobe Illustrator",
               "Adobe After Effects",
               "Adobe Animator",
-              "Actionscript 3",
+              "Actionscript",
               "SQL server",
               "Entity Framework",
               "MVC",
@@ -162,10 +185,9 @@ export default function MainContent({ animationTypes, onNavLinkClick }) {
       {/* Projekt-sektion med semi-transparent bakgrund */}
       <section
         id="projects"
-        className="py-24 px-4 md:px-10 bg-gray-800/70 backdrop-blur-xs border-t border-t-white/10"
+        className="py-24 px-6 md:pl-26 bg-gray-800/70 backdrop-blur-xs border-t border-t-white/10"
       >
-        {/* Justerad opacitet */}
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <Briefcase size="60" className="mx-auto mb-8 text-fuchsia-700 " />
 
           <h2
@@ -174,7 +196,7 @@ export default function MainContent({ animationTypes, onNavLinkClick }) {
           >
             Mina Projekt
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
             <ProjectCard
               title="Munamii Cakery"
               description="Ett bageri"
@@ -200,7 +222,7 @@ export default function MainContent({ animationTypes, onNavLinkClick }) {
               description="En modern väderapp som hämtar data från ett externt API och visar prognoser live genom web API. Stilren design i både mörkt och ljust tema."
               technologies={["React", "Tailwind CSS", "Web API"]}
               githubLink="https://github.com/GnomezHub/crabby-weather"
-              liveLink="https://Gnomezhub.github.io/crabby-weather"
+              liveLink="https://crabby-weather.netlify.app"
               image="assets/crabby-weather.png"
               index={2}
               animationType="fadeInRight"
@@ -247,11 +269,9 @@ export default function MainContent({ animationTypes, onNavLinkClick }) {
       {/* Kontakt-sektion med semi-transparent bakgrund */}
       <section
         id="contact"
-        className="py-24 px-4 md:px-10 bg-gray-900 border-t-2 border-white/20"
+        className="py-24 px-6 md:pl-26 bg-gray-900 border-t-2 border-white/20"
       >
-        {" "}
-        {/* Justerad opacitet */}
-        <div className="max-w-xl mx-auto text-center">
+        <div className="max-w-2xl mx-auto text-center">
           <Mail size="60" className="mx-auto mb-8 text-indigo-700 " />
           <h2
             className="text-4xl font-bold mb-8 font-heading text-indigo-600" //text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500"
@@ -269,7 +289,7 @@ export default function MainContent({ animationTypes, onNavLinkClick }) {
           </p>
           <ContactForm />
           <div
-            className="space-y-6 mt-22"
+            className="space-y-6 mt-12"
             data-animation="subtle-fade-in-up"
             data-stagger-index="2"
           >
@@ -281,11 +301,12 @@ export default function MainContent({ animationTypes, onNavLinkClick }) {
               href="https://dannygomez-cv.netlify.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700
+              className="inline-flex items-center justify-center bg-teal-700 hover:bg-emerald-600
                text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
             >
               <FileText size={20} className="mr-3" /> Curriculum Vitae
             </a>
+
             <div className="flex justify-center space-x-6 pt-4">
               <a
                 href="https://gnomezhub.github.io/"
@@ -302,17 +323,14 @@ export default function MainContent({ animationTypes, onNavLinkClick }) {
               >
                 <Mail size={32} />
               </a>
-              {/* <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transform hover:scale-110 transition-all duration-300"
-              >
-                <Linkedin size={32} />
-              </a> */}
             </div>
           </div>
         </div>
+        <img
+          src="assets/skulptur_sidan_edit.png"
+          alt="dude"
+          className="w-42 mr-10 absolute bottom-9 right-1"
+        />
       </section>
       {/* Sidfot */}
       <footer className="py-8 text-center text-gray-500 text-sm bg-gray-900 border-t border-white/10">
@@ -329,7 +347,7 @@ export default function MainContent({ animationTypes, onNavLinkClick }) {
 const SkillCard = ({ skill, index, animationType }) => (
   <div
     className="bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col 
-    items-center justify-center text-center transform hover:-translate-y-2 transition-transform duration-300 ease-in-out border-2 border-white/10 hover:border-emerald-500"
+    items-center justify-center text-center transition-all duration-300 ease-in-out border-2 border-white/10 hover:border-emerald-500"
     data-animation={animationType}
     data-stagger-index={index}
   >

@@ -24,7 +24,7 @@ export default function NavLink({
   var dottedDiv = isActive
     ? " m-1 rounded-full border-6 border-dotted border-yellow-400 p-0"
     : "m-2";
-
+  //isMobile=false;
   if (isMobile) {
     return (
       <div className={dottedDiv}>
@@ -50,12 +50,8 @@ export default function NavLink({
         }`}
         aria-label={label}
       >
-        {" "}
-        {/* Fixade inactiveClasses här */}
         {icon}
-        <span
-          className={`absolute left-full ml-4 whitespace-nowrap bg-gray-700 text-white text-sm px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none`}
-        >
+        <span className="absolute left-full ml-4 whitespace-nowrap bg-gray-700 text-white text-sm px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
           {label}
         </span>
       </button>

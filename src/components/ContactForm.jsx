@@ -43,7 +43,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="text-lg text-gray-300 mb-8 text-left">
+    <div className="text-lg p-6 rounded-xl border border-emerald-700/70 text-gray-300 mb-8 text-left">
       <form
         name="contact"
         method="POST"

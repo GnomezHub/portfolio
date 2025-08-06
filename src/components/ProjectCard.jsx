@@ -13,11 +13,13 @@ export default function ProjectCard({
   image,
   index,
   animationType,
-  
 }) {
   return (
     <div
-      className="bg-gray-800 rounded-xl shadow-2xl overflow-hidden flex flex-col transform hover:scale-[1.03] transition-transform duration-300 ease-in-out border border-white/10 hover:border-teal-500"
+      className="bg-gray-800 rounded-xl shadow-2xl overflow-hidden flex flex-col
+      border border-teal-500/30 hover:border-teal-500"
+             //  transform hover:scale-[1.03] transition-transform duration-300 ease-in-out
+
       data-animation={animationType}
       data-stagger-index={index}
     >
@@ -32,7 +34,9 @@ export default function ProjectCard({
         }}
       />
       <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-2xl font-bold font-heading text-white mb-3">{title}</h3>
+        <h3 className="text-2xl font-bold font-heading text-white mb-3">
+          {title}
+        </h3>
         <p className="text-gray-300 text-body mb-4 flex-grow">{description}</p>
         <div className="flex flex-wrap gap-2 mb-5">
           {technologies.map((tech, idx) => (
@@ -47,6 +51,8 @@ export default function ProjectCard({
         <div className="flex justify-between items-center mt-auto pt-4 border-t border-white/10">
           {githubLink != "" && (
             <a
+              data-animation="fadeInRight"
+              data-stagger-index={2}
               href={githubLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -58,6 +64,8 @@ export default function ProjectCard({
 
           {liveLink != "" && (
             <a
+              data-animation="fadeInLeft"
+              data-stagger-index={2}
               href={liveLink}
               target="_blank"
               rel="noopener noreferrer"

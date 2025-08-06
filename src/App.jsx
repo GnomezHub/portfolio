@@ -7,8 +7,6 @@ import {
   Mail,
   Brain,
   Github,
-  Linkedin,
-  X,
   ExternalLink,
 } from "lucide-react";
 
@@ -21,8 +19,6 @@ import MainContent from "./components/MainContent";
 const App = () => {
   // State för att hantera aktiv sektion för navigering
   const [activeSection, setActiveSection] = useState("home");
-  // State för att hantera synlighet av mobilnavigering
-  // const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   // State för att hantera parallax-offset för bakgrunden
   const [parallaxOffset, setParallaxOffset] = useState(0);
 
@@ -33,7 +29,7 @@ const App = () => {
       // Justera värdet (t.ex. 0.3 eller 0.7) för att ändra parallax-hastigheten.
       // Ett högre värde (närmare 1) gör att bakgrunden rör sig mer med skrollen.
       // Ett lägre värde (närmare 0) gör att bakgrunden rör sig mindre (mer "fixed").
-      setParallaxOffset(window.scrollY * -0.1); // Justerat till 0.4 för en märkbar men inte för snabb effekt
+      setParallaxOffset(window.scrollY * -0.2); // Justerat till 0.4 för en märkbar men inte för snabb effekt
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -66,7 +62,7 @@ const App = () => {
               // Om det är ett "staggered" element, applicera fördröjning
               if (el.dataset.staggerIndex !== undefined) {
                 el.style.animationDelay = `${
-                  parseInt(el.dataset.staggerIndex) * 150
+                  parseInt(el.dataset.staggerIndex) * 200
                 }ms`;
               }
             });
@@ -91,14 +87,6 @@ const App = () => {
     };
   }, []);
 
-  // Array med tillgängliga animationstyper för slumpmässig tilldelning
-  const animationTypes = [
-    "subtle-fade-in-up",
-    "fadeInLeft",
-    "fadeInRight",
-    "zoomIn",
-    "softZoomInUp",
-  ];
 
   return (
     <div className="min-h-full bg-transparent text-gray-100 font-sans">
@@ -171,7 +159,7 @@ const App = () => {
           </li>
         </ul>
       </nav>
-      {/* NY Mobilmeny (Horisontell, fixerad längst ner) */}
+      {/*Mobilmeny (Horisontell, fixerad längst ner) */}
       <nav
         className="md:hidden fixed bottom-0 left-0 w-full h-16
        bg-gray-900/60 backdrop-blur-xs border-t-2 border-white/10 z-50"
@@ -230,14 +218,9 @@ const App = () => {
         </ul>
       </nav>
       {/* Huvudinnehåll - med padding i botten för mobilmenyn */}
-      <MainContent
-        animationTypes={animationTypes}
-        onNavLinkClick={handleNavLinkClick}
-      />
+      <MainContent />
     </div>
   );
 };
-
-// --- Underkomponenter för Färdigheter och Projekt ---
 
 export default App;
