@@ -383,7 +383,7 @@ export default function MainContent() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
             <ProjectCard
               title="Munamii Cakery"
-              description="Ett bageri"
+              description="Ett bageri som erbjuder cupcakes och bröllopstårtor. Responsiv design för datorskärm och telefon."
               technologies={["React", "Tailwind CSS"]}
               githubLink="https://github.com/GnomezHub/munamii"
               liveLink="https://munamiii.netlify.app"
@@ -403,7 +403,7 @@ export default function MainContent() {
             />
             <ProjectCard
               title="Crabby Weather"
-              description="En modern väderapp som hämtar data från ett externt API och visar prognoser live genom web API. Stilren design i både mörkt och ljust tema."
+              description="En modern väderapp som hämtar data från ett externt API och visar prognoser live genom web API. Stilren design som lämpar sig bra från mobilen men också på skärm, i både mörkt och ljust tema"
               technologies={["React", "Tailwind CSS", "Web API"]}
               githubLink="https://github.com/GnomezHub/crabby-weather"
               liveLink="https://crabby-weather.netlify.app"
@@ -587,13 +587,13 @@ export default function MainContent() {
           <Mail size="60" className="mx-auto mb-8 text-indigo-700 " />
           <h2
             className="text-4xl font-bold mb-8 font-heading text-indigo-600"
-            data-animation="subtle-fade-in-up"
+            //    data-animation="subtle-fade-in-up"
           >
             Kontakta Mig
           </h2>
           <p
             className="text-lg text-gray-300 mb-8"
-            data-animation="subtle-fade-in-up"
+            //  data-animation="subtle-fade-in-up"
           >
             Vill du involvera mig i något, fråga ut mig eller ge mig smicker,
             tveka då inte att höra av dig med hjälp av formuläret nedan!
