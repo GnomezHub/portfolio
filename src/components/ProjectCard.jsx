@@ -14,14 +14,19 @@ export default function ProjectCard({
   index,
   animationType,
 }) {
+  // const animationType =
+  //   animationTypes[
+  //     Math.floor(Math.random() * animationTypes.length)
+  //   ];
+
   return (
     <div
       className="bg-gray-800 rounded-xl shadow-2xl overflow-hidden flex flex-col
-      border border-teal-500/30 hover:border-teal-500"
-             //  transform hover:scale-[1.03] transition-transform duration-300 ease-in-out
+      border border-teal-600/40" // hover:border-teal-500"
+      //  transform hover:scale-[1.03] transition-transform duration-300 ease-in-out
 
-      data-animation={animationType}
-      data-stagger-index={index}
+      //  data-animation={animationType}
+      // data-stagger-index={index}
     >
       <img
         src={image}
@@ -51,8 +56,8 @@ export default function ProjectCard({
         <div className="flex justify-between items-center mt-auto pt-4 border-t border-white/10">
           {githubLink != "" && (
             <a
-              data-animation="fadeInRight"
-              data-stagger-index={2}
+               data-animation="fadeInRight"
+              //    data-stagger-index={2}
               href={githubLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -64,8 +69,8 @@ export default function ProjectCard({
 
           {liveLink != "" && (
             <a
-              data-animation="fadeInLeft"
-              data-stagger-index={2}
+               data-animation="fadeInLeft"
+              //data-stagger-index={2}
               href={liveLink}
               target="_blank"
               rel="noopener noreferrer"

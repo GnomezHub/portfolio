@@ -8,6 +8,7 @@ import {
   Brain,
   Github,
   ExternalLink,
+  Brush,
 } from "lucide-react";
 
 import Eye from "./components/Eye";
@@ -87,7 +88,6 @@ const App = () => {
     };
   }, []);
 
-
   return (
     <div className="min-h-full bg-transparent text-gray-100 font-sans">
       {/* Global Parallax Bakgrunds-div */}
@@ -150,6 +150,15 @@ const App = () => {
           </li>
           <li>
             <NavLink
+              icon={<Brush size={24} />}
+              label="Målningar"
+              sectionId="paintings"
+              activeSection={activeSection}
+              onClick={handleNavLinkClick}
+            />
+          </li>
+          <li>
+            <NavLink
               icon={<Mail size={24} />}
               label="Kontakt"
               sectionId="contact"
@@ -203,6 +212,15 @@ const App = () => {
               activeSection={activeSection}
               onClick={handleNavLinkClick}
               isMobile={true}
+            />
+          </li>
+          <li>
+            <NavLink
+              icon={<Brush size={26} />}
+              label="Målningar"
+              sectionId="paintings"
+              activeSection={activeSection}
+              onClick={handleNavLinkClick}
             />
           </li>
           <li>

@@ -1,6 +1,7 @@
 import ProjectCard from "./ProjectCard";
 import ContactForm from "./ContactForm";
 import Eye from "./Eye";
+import React, { useState, useEffect, useRef } from "react";
 
 import {
   Home,
@@ -12,6 +13,12 @@ import {
   Github,
   FileText,
   ExternalLink,
+  Brush,
+  // Nya ikoner för zoom-kontroller
+  ZoomIn,
+  ZoomOut,
+  Expand as Maximize, // Använder Expand-ikonen för "originalstorlek"
+  Shrink as Minimize, // Använder Shrink-ikonen för "passa till vyn"
 } from "lucide-react";
 
 export default function MainContent() {
@@ -24,10 +31,203 @@ export default function MainContent() {
     "softZoomInUp",
   ];
 
+  const [images] = useState([
+    {
+      id: 1,
+      src: "assets/paintings/fetuslotus.jpg",
+      alt: "En surrealistisk figur med många ögon som sitter i lotusställning",
+      title: "Lotusfoster",
+    },
+    {
+      id: 2,
+      src: "assets/paintings/elephantman.jpg",
+      alt: "En surrealistisk scen med djur och en elefantmänniska",
+      title: "Elefantmannen",
+    },
+    {
+      id: 3,
+      src: "assets/paintings/mariemaid.jpg",
+      alt: "En surrealistisk målning med en sjöjungfru och fantasifigurer",
+      title: "Sjöjungfruns Dröm",
+    },
+    {
+      id: 4,
+      src: "assets/paintings/fishybongbong.jpg",
+      alt: "En abstrakt målning av en fisk med bubblor",
+      title: "Fishy bongbong",
+    },
+    {
+      id: 5,
+      src: "assets/paintings/girltangled.jpg",
+      alt: "En naken kvinnofigur omgiven av abstrakta former",
+      title: "Flicka i Virveln",
+    },
+    {
+      id: 6,
+      src: "assets/paintings/lycoigruff.jpg",
+      alt: "En katt med gröna ögon under en fullmåne",
+      title: "Månens Väktare",
+    },
+
+    {
+      id: 7,
+      src: "assets/paintings/trappedfantasy.jpg",
+      alt: "Ett ansikte med blått hår som tittar fram genom persienner",
+      title: "Fängslad Fantasi",
+    },
+    {
+      id: 8,
+      src: "assets/paintings/couplepop.jpg",
+      alt: "Ett par i popkonststil",
+      title: "Pop-par",
+    },
+    {
+      id: 9,
+      src: "assets/paintings/deepdive.jpg",
+      alt: "En färgglad marulk i djuphavet",
+      title: "Deep Dive",
+    },
+    {
+      id: 10,
+      src: "assets/paintings/femmeforbidden.jpg",
+      alt: "En stiliserad kvinnofigur i underkläder med ett lås",
+      title: "Femme Forbidden",
+    },
+    {
+      id: 11,
+      src: "assets/paintings/zenzloth.jpg",
+      alt: "And I was like whatever bitches, and the bitches whatevered",
+      title: "And The Bitches Whatevered",
+    },
+  ]);
+
+  // State för att hålla reda på vilken bild som är vald för att visas i större format
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // --- NYA STATES FÖR ZOOM OCH PANORERING ---
+  const [zoom, setZoom] = useState(1);
+  const [transform, setTransform] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+
+  // Referenser
+  const imageContainerRef = useRef(null); // Ref till div som innehåller den stora bilden
+  const imageRef = useRef(null); // Ref till själva <img>-elementet
+  const dragStartRef = useRef({ x: 0, y: 0, transformX: 0, transformY: 0 }); // Ref för att spara startposition vid drag
+
+  // Funktion för att öppna modalen med en specifik bild
+  const openModal = (image) => {
+    setSelectedImage(image);
+  };
+
+  // Funktion för att stänga modalen
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
+
+  // --- UPPDATERAD USEEFFECT FÖR ATT HANTERA INITIAL ZOOM ---
+  // Denna effekt körs när en bild väljs. Den beräknar den initiala zoomnivån
+  // så att hela bilden passar i vyn ("fit to view").
+  useEffect(() => {
+    if (selectedImage && imageContainerRef.current) {
+      document.body.style.overflow = "hidden";
+
+      const imageElement = new Image();
+      imageElement.src = selectedImage.src;
+
+      imageElement.onload = () => {
+        const container = imageContainerRef.current;
+        if (!container) return;
+
+        const { naturalWidth, naturalHeight } = imageElement;
+        const { clientWidth: containerWidth, clientHeight: containerHeight } =
+          container;
+
+        // Beräkna "fit"-skalan
+        const scaleX = containerWidth / naturalWidth;
+        const scaleY = containerHeight / naturalHeight;
+        const initialScale = Math.min(scaleX, scaleY, 1); // Se till att inte zooma in om bilden är mindre än vyn
+
+        setZoom(initialScale);
+        setTransform({ x: 0, y: 0 }); // Centrera bilden
+      };
+
+      return () => {
+        document.body.style.overflow = "";
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [selectedImage]);
+
+  // --- NYA FUNKTIONER FÖR ZOOM-KNAPPARNA ---
+  const handleZoomIn = (e) => {
+    e.stopPropagation();
+    setZoom((z) => Math.min(z * 1.2, 5)); // Max zoom 5x
+  };
+  const handleZoomOut = (e) => {
+    e.stopPropagation();
+    setZoom((z) => Math.max(z / 1.2, 0.1)); // Min zoom 0.1x
+  };
+
+  const handleZoomToFit = (e) => {
+    e.stopPropagation();
+    if (imageRef.current && imageContainerRef.current) {
+      const { naturalWidth, naturalHeight } = imageRef.current;
+      const { clientWidth, clientHeight } = imageContainerRef.current;
+      const scaleX = clientWidth / naturalWidth;
+      const scaleY = clientHeight / naturalHeight;
+      setZoom(Math.min(scaleX, scaleY, 1));
+      setTransform({ x: 0, y: 0 });
+    }
+  };
+
+  const handleZoomToOriginal = (e) => {
+    e.stopPropagation();
+    setZoom(1);
+    setTransform({ x: 0, y: 0 }); // Centrera om vid 100%
+  };
+
+  // --- UPPDATERADE FUNKTIONER FÖR PANORERING (DRAG) ---
+  const handleMouseDown = (e) => {
+    if (e.button !== 0) return;
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+    dragStartRef.current = {
+      x: e.clientX,
+      y: e.clientY,
+      transformX: transform.x,
+      transformY: transform.y,
+    };
+    if (imageRef.current) imageRef.current.style.cursor = "grabbing";
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    e.stopPropagation();
+    const dx = e.clientX - dragStartRef.current.x;
+    const dy = e.clientY - dragStartRef.current.y;
+    setTransform({
+      x: dragStartRef.current.transformX + dx,
+      y: dragStartRef.current.transformY + dy,
+    });
+  };
+
+  const handleMouseUp = (e) => {
+    e.stopPropagation();
+    setIsDragging(false);
+    if (imageRef.current) imageRef.current.style.cursor = "grab";
+  };
+
+  const handleMouseLeave = (e) => {
+    if (isDragging) {
+      handleMouseUp(e);
+    }
+  };
+
   return (
     <main className="relative z-20 md:pl-0 pb-16 md:pb-0 scroll-smooth">
-      {" "}
-      {/* z-20 för att innehållet ska ligga ovanför parallax-bakgrunden */}
+      {/* ... (all of your existing sections: home, about, skills, projects) ... */}
       {/* Hem-sektion */}
       <section
         id="home"
@@ -35,35 +235,22 @@ export default function MainContent() {
       >
         {/* Innehåll i hem-sektionen */}
         <div
-          className="bg-black/50 backdrop-bluur-xs p-8 rounded-xl shadow-2xl max-w-3xl border-2  border-white/10"
+          className="bg-gray-900/50 backdrop-blur-xs p-8 rounded-xl shadow-2xl max-w-3xl border-2  border-white/10"
           data-animation="zoomIn"
         >
-          <h1 className="text-4xl font-heading md:text-6xl font-extrabold text-lime-600 ">
+          <h1 className="text-4xl mb-4 font-heading md:text-6xl font-extrabold text-lime-600 ">
             {/*text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-500 mb-4"> */}
             Hej, jag är Danny Gomez
           </h1>
-          <img
-            src="assets/skulptur_matt.png"
-            alt="sculpture"
-            className="w-30 mx-auto py-6"
-            data-animation="softZoomInUp"
-            data-stagger-index={0}
-          />
 
+          <Eye className="w-24 h-24" />
           <p
             data-animation="fadeInRight"
             data-stagger-index={2}
-            className="text-xl md:text-2xl font-heading text-gray-200 mb-8"
+            className="text-xl md:text-2xl font-heading text-gray-200 mt-8"
           >
             En skogstokig fullstack-utvecklare med konstnärliga drag
           </p>
-          {/* <button
-            onClick={() => onNavLinkClick("projects")}
-            //className="bg-emerald-600  hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
-            className="bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
-          >
-            Mina Projekt
-          </button> */}
         </div>
       </section>
       {/* Om Mig-sektion med semi-transparent bakgrund */}
@@ -72,12 +259,6 @@ export default function MainContent() {
         className="py-24 px-6 md:pl-26 bg-gray-900/80 border-t-2 border-amber-100/10"
       >
         <div className="relative max-w-4xl mx-auto">
-          {/* <img
-            src="assets/djungelbubs.png"
-            alt="En placeholder-bild som överlappar den svarta rutan."
-            class="absolute top-[-270px] left-1/2 transform -translate-x-1/2 
-         shadow-lg z-10"
-          /> */}
           <h2
             className="text-4xl font-heading font-bold text-center mb-16 text-amber-500 " //text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500"
             data-animation="subtle-fade-in-up"
@@ -116,8 +297,13 @@ export default function MainContent() {
               </p>
             </div>
           </div>
-          <Eye className="w-20 h-20" />
-          {/* <img src="assets/skulptur_glansig.png" alt="sculpture" className="w-50 mx-auto py-6" /> */}
+          <img
+            src="assets/skulptur_andrasidan.png"
+            alt="sculpture"
+            className="w-30 mx-auto py-6"
+            data-animation="softZoomInUp"
+            data-stagger-index={1}
+          />
         </div>
       </section>
       {/* Färdigheter-sektion med semi-transparent bakgrund */}
@@ -128,7 +314,7 @@ export default function MainContent() {
         <div className="max-w-6xl mx-auto">
           <Brain size="60" className="mx-auto mb-8 text-lime-600 " />
           <h2
-            className="text-4xl text-center font-heading font-bold mb-22 text-lime-500" //text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-green-500"
+            className="text-4xl text-center font-heading font-bold mb-22 text-lime-500"
             data-animation="subtle-fade-in-up"
           >
             Mina Skills
@@ -164,6 +350,7 @@ export default function MainContent() {
               "Engelska",
               "Svenska",
               "Spanska",
+              "Katt",
             ].map((skill, index) => {
               const randomAnimation =
                 animationTypes[
@@ -190,10 +377,7 @@ export default function MainContent() {
         <div className="max-w-7xl mx-auto">
           <Briefcase size="60" className="mx-auto mb-8 text-fuchsia-700 " />
 
-          <h2
-            className="text-4xl font-bold text-center font-heading mb-22 text-fuchsia-600" //text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-purple-500"
-            //  data-animation="subtle-fade-in-up"
-          >
+          <h2 className="text-4xl font-bold text-center font-heading mb-22 text-fuchsia-600">
             Mina Projekt
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
@@ -266,6 +450,134 @@ export default function MainContent() {
           </div>
         </div>
       </section>
+
+      {/* --- HELT NY OCH FÖRBÄTTRAD MODAL FÖR BILDVISNING --- */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black/70 bg-opacity-65 flex flex-col items-center justify-center z-50 p-4 transition-opacity duration-300"
+          onClick={closeModal} // Stäng modalen när man klickar på bakgrunden
+        >
+          <div
+            className="relative w-full md:pb-16 h-full flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()} // Förhindra att klick inuti stänger den
+            onMouseUp={handleMouseUp} // Släpp drag-state även om musen släpps här
+            onMouseMove={handleMouseMove} // Låt panorering fungera över hela ytan
+            onMouseLeave={handleMouseLeave} // Stoppa drag om musen lämnar
+          >
+            {/* Stäng-knapp uppe i högra hörnet */}
+            <button
+              className="absolute  cursor-pointer p-2 top-4 right-4 bg-gray-900/50 rounded-lg  text-shadow-gray-950 text-white hover:text-gray-300 text-4xl font-bold transition-colors duration-200 z-50"
+              onClick={closeModal}
+              aria-label="Stäng"
+            >
+              &times;
+            </button>
+
+            {/* Bild-viewport: denna div har overflow: hidden */}
+            <div
+              ref={imageContainerRef}
+              className="w-full h-full flex items-center justify-center overflow-hidden"
+            >
+              <img
+                ref={imageRef}
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                className="max-w-none max-h-none"
+                style={{
+                  transform: `translate(${transform.x}px, ${transform.y}px) scale(${zoom})`,
+                  cursor: isDragging ? "grabbing" : "grab",
+                  transition: isDragging ? "none" : "transform 0.2s ease-out", // Mjukare övergång när man inte drar
+                }}
+                onMouseDown={handleMouseDown}
+                onDragStart={(e) => e.preventDefault()} // Förhindra webbläsarens inbyggda bild-drag
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = `https://placehold.co/800x600/CCCCCC/666666?text=Bilden+kunde+inte+laddas`;
+                }}
+              />
+            </div>
+
+            {/* Kontroller för zoom och visning */}
+            <div className="absolute bottom-14 md:bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm p-2 rounded-xl flex items-center gap-2 z-40">
+              <button
+                onClick={handleZoomOut}
+                title="Zooma ut"
+                className="text-white p-2 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
+              >
+                <ZoomOut size={24} />
+              </button>
+
+              <button
+                onClick={handleZoomToFit}
+                title="Anpassa till fönstret"
+                className="text-white p-2 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
+              >
+                <Minimize size={24} />
+              </button>
+              <button
+                onClick={handleZoomToOriginal}
+                title="Originalstorlek (100%)"
+                className="text-white p-2 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
+              >
+                <Maximize size={24} />
+              </button>
+              <button
+                onClick={handleZoomIn}
+                title="Zooma in"
+                className="text-white p-2 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
+              >
+                <ZoomIn size={24} />
+              </button>
+            </div>
+
+            {/* Bildtitel */}
+            <p className="absolute top-4 left-1/2 -translate-x-1/2 text-white text-lg font-medium bg-black/50 px-4 py-2 rounded-lg">
+              {selectedImage.title}
+            </p>
+          </div>
+        </div>
+      )}
+
+      <section
+        id="paintings"
+        className="py-24 px-6 md:pl-26 bg-gray-400/60 backdrop-blur-xs border-t border-t-white/10"
+      >
+        <div className="max-w-7xl mx-auto">
+          <Brush size="60" className="mx-auto mb-8 text-rose-950" />
+
+          <h2 className="text-4xl font-bold text-center font-heading mb-16 text-rose-950">
+            Mina Målningar
+          </h2>
+          <div className="min-h-screenp-4 font-sans antialiased flex flex-col items-center">
+            {/* Bildgalleriet med miniatyrer */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl w-full">
+              {images.map((image) => (
+                <div
+                  key={image.id}
+                  className="relative overflow-hidden rounded-lg cursor-pointer transform transition-transform duration-300 hover:scale-105 group"
+                  onClick={() => openModal(image)}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="block w-full h-auto object-cover object-center rounded-md"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = `https://placehold.co/600x400/CCCCCC/666666?text=Laddningsfel`;
+                    }}
+                  />
+
+                  <div className="p-3 bg-stone-300/50 rounded-b-lg text-center">
+                    <p className="text-gray-800 text-base font-semibold">
+                      {image.title}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
       {/* Kontakt-sektion med semi-transparent bakgrund */}
       <section
         id="contact"
@@ -274,7 +586,7 @@ export default function MainContent() {
         <div className="max-w-2xl mx-auto text-center">
           <Mail size="60" className="mx-auto mb-8 text-indigo-700 " />
           <h2
-            className="text-4xl font-bold mb-8 font-heading text-indigo-600" //text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500"
+            className="text-4xl font-bold mb-8 font-heading text-indigo-600"
             data-animation="subtle-fade-in-up"
           >
             Kontakta Mig
@@ -282,17 +594,12 @@ export default function MainContent() {
           <p
             className="text-lg text-gray-300 mb-8"
             data-animation="subtle-fade-in-up"
-            data-stagger-index="1"
           >
             Vill du involvera mig i något, fråga ut mig eller ge mig smicker,
             tveka då inte att höra av dig med hjälp av formuläret nedan!
           </p>
           <ContactForm />
-          <div
-            className="space-y-6 mt-12"
-            data-animation="subtle-fade-in-up"
-            data-stagger-index="2"
-          >
+          <div className="space-y-6 mt-12" data-animation="subtle-fade-in-up">
             <p className="text-lg text-gray-300 mb-8">
               Fler kontaktuppgifter och annan information finner du i mitt CV
               nedan
@@ -329,7 +636,7 @@ export default function MainContent() {
         <img
           src="assets/skulptur_sidan_edit.png"
           alt="dude"
-          className="w-42 mr-10 absolute bottom-9 right-1"
+          className="w-30 absolute bottom-9 right-0"
         />
       </section>
       {/* Sidfot */}
@@ -342,8 +649,6 @@ export default function MainContent() {
 }
 
 // Kort för färdigheter
-// Använder Lucide-ikonen "Code" för att representera färdigheter
-// Animationer tilldelas slumpmässigt från animationTypes-arrayen
 const SkillCard = ({ skill, index, animationType }) => (
   <div
     className="bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col 

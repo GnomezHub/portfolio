@@ -84,7 +84,7 @@ export default function Eye({ className = "" }) {
 
   return (
     <div
-      className="overflow-clip mx-auto flex flex-col items-center hover:scale-190 transition-all ease-in-out duration-500"
+      className="z-50 overflow-clip mx-auto flex flex-col items-center hover:scale-190 transition-all ease-in-out duration-500"
       onMouseDown={() => setIsMouseDown(true)}
       onMouseUp={() => setIsMouseDown(false)}
     >
