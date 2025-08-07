@@ -59,7 +59,8 @@ export default function ContactForm() {
             id="yourname"
             value={formData.name}
             onChange={handleChange}
-            className="bg-emerald-100 text-gray-900 text-md  rounded-lg focus:bg-amber-100 w-full p-2"          />
+            className="bg-emerald-100 text-gray-900 text-md  rounded-lg focus:bg-amber-100 w-full p-2"
+          />
         </p>
         <p className="my-4">
           <label htmlFor="youremail">Din email:</label> <br />
@@ -87,7 +88,7 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="text-right inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+            className="text-right inline-flex items-center justify-center cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
           >
             {isSubmitting ? "Skickar..." : "Skicka"}
           </button>

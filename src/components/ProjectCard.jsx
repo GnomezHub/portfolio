@@ -1,4 +1,10 @@
-import { Github, ExternalLink } from "lucide-react";
+import {
+  Github,
+  ExternalLink,
+  DownloadCloud,
+  Youtube,
+  CloudDownload,
+} from "lucide-react";
 
 // Kort för projekt
 // Innehåller titel, beskrivning, teknologier, länkar och bild
@@ -8,11 +14,13 @@ export default function ProjectCard({
   title,
   description,
   technologies,
-  githubLink,
-  liveLink,
+  githubLink = "",
+  liveLink = "",
+  youtubeLink = "",
+  downloadLink = "",
   image,
-  index,
-  animationType,
+  // index,
+  // animationType,
 }) {
   // const animationType =
   //   animationTypes[
@@ -56,7 +64,7 @@ export default function ProjectCard({
         <div className="flex justify-between items-center mt-auto pt-4 border-t border-white/10">
           {githubLink != "" && (
             <a
-               data-animation="fadeInRight"
+              // data-animation="fadeInRight"
               //    data-stagger-index={2}
               href={githubLink}
               target="_blank"
@@ -66,17 +74,41 @@ export default function ProjectCard({
               <Github size={20} className="mr-2" /> GitHub
             </a>
           )}
+          {downloadLink != "" && (
+            <a
+              //data-animation="fadeInLeft"
+              //data-stagger-index={2}
+              href={downloadLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center  text-emerald-400 hover:text-emerald-300 font-semibold transition-colors duration-200"
+            >
+              <CloudDownload size={20} className="mr-2" /> Download App
+            </a>
+          )}
+          {youtubeLink != "" && (
+            <a
+              //data-animation="fadeInLeft"
+              //data-stagger-index={2}
+              href={youtubeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-red-500 hover:text-rose-400 font-semibold transition-colors duration-200"
+            >
+              Watch Demo <Youtube size={22} className="ml-2" />
+            </a>
+          )}
 
           {liveLink != "" && (
             <a
-               data-animation="fadeInLeft"
+              //  data-animation="fadeInLeft"
               //data-stagger-index={2}
               href={liveLink}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center text-teal-400 hover:text-teal-300 font-semibold transition-colors duration-200"
             >
-              Live Demo <ExternalLink size={16} className="ml-2" />
+              Live Demo <ExternalLink size={20} className="ml-2" />
             </a>
           )}
         </div>

@@ -47,7 +47,14 @@ const App = () => {
 
   // Effekt för att uppdatera aktiv sektion och trigga animationer vid skroll
   useEffect(() => {
-    const sections = ["home", "about", "skills", "projects", "contact"];
+    const sections = [
+      "home",
+      "about",
+      "skills",
+      "projects",
+      "paintings",
+      "contact",
+    ];
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

@@ -17,6 +17,9 @@ import {
   // Nya ikoner för zoom-kontroller
   ZoomIn,
   ZoomOut,
+  X,
+  XSquare,
+  XCircleIcon,
   Expand as Maximize, // Använder Expand-ikonen för "originalstorlek"
   Shrink as Minimize, // Använder Shrink-ikonen för "passa till vyn"
 } from "lucide-react";
@@ -48,7 +51,7 @@ export default function MainContent() {
       id: 3,
       src: "assets/paintings/mariemaid.jpg",
       alt: "En surrealistisk målning med en sjöjungfru och fantasifigurer",
-      title: "Sjöjungfruns Dröm",
+      title: "Mariemaiden",
     },
     {
       id: 4,
@@ -60,12 +63,12 @@ export default function MainContent() {
       id: 5,
       src: "assets/paintings/girltangled.jpg",
       alt: "En naken kvinnofigur omgiven av abstrakta former",
-      title: "Flicka i Virveln",
+      title: "Flicka Färgtrasslad",
     },
     {
       id: 6,
       src: "assets/paintings/lycoigruff.jpg",
-      alt: "En katt med gröna ögon under en fullmåne",
+      alt: "En varulvskatt under en fullmåne",
       title: "Månens Väktare",
     },
 
@@ -78,7 +81,7 @@ export default function MainContent() {
     {
       id: 8,
       src: "assets/paintings/couplepop.jpg",
-      alt: "Ett par i popkonststil",
+      alt: "Ett par poppar i en färgglad stil",
       title: "Pop-par",
     },
     {
@@ -284,7 +287,7 @@ export default function MainContent() {
               </h4>
               <p className="font-body space-y-6">
                 En utvecklare som inte är rädd för inveckling. Har funnits med
-                sedan Macromedia Flash tiden och har genomgått en intensiv
+                sedan Macromedia Flash -tiden och har genomgått en intensiv
                 modernisering av sina kunskaper.
               </p>
               <p className="font-body space-y-6">
@@ -426,7 +429,7 @@ export default function MainContent() {
               description="Ett program för visual jockeys som skapar kaleidoskopiska animationer i realtid av bilder man väljer. De olika effekterna justeras men scrolling. Kontrollerna har separata fönster så att man kan ha effekterna i fullskärm genom exempelvis projektor."
               technologies={["Adobe AIR", "AS3", "Adobe Animator"]}
               githubLink=""
-              liveLink="https://youtu.be/V7Cxf1Wduok"
+              youtubeLink="https://youtu.be/V7Cxf1Wduok"
               image="assets/mandaleido.jpg"
               index={6}
               animationType="fadeInLeft"
@@ -441,13 +444,14 @@ export default function MainContent() {
                 "Adobe Animator",
                 "Adobe Photoshop",
               ]}
-              githubLink="https://drive.google.com/file/d/1x4KYAYfpvtpRSwuOviNQVUSS7WKm8lMn/view?usp=drive_link"
-              liveLink="https://youtu.be/VLAaweiRSUk"
+              downloadLink="https://drive.google.com/file/d/1x4KYAYfpvtpRSwuOviNQVUSS7WKm8lMn/view?usp=drive_link"
+              youtubeLink="https://youtu.be/VLAaweiRSUk"
               image="assets/Platformercat.jpg"
               index={7}
               animationType="fadeInRight"
             />
           </div>
+          <Briefcase size="60" className="mx-auto mt-22 text-fuchsia-700 " />
         </div>
       </section>
 
@@ -466,11 +470,11 @@ export default function MainContent() {
           >
             {/* Stäng-knapp uppe i högra hörnet */}
             <button
-              className="absolute  cursor-pointer p-2 top-4 right-4 bg-gray-900/50 rounded-lg  text-shadow-gray-950 text-white hover:text-gray-300 text-4xl font-bold transition-colors duration-200 z-50"
+              className="absolute cursor-pointer p-2 top-4 right-4 bg-gray-900/50 text-white rounded-full hover:bg-white/20 transition-colors  z-50"
               onClick={closeModal}
               aria-label="Stäng"
             >
-              &times;
+              <X size={32} />
             </button>
 
             {/* Bild-viewport: denna div har overflow: hidden */}
@@ -576,6 +580,7 @@ export default function MainContent() {
               ))}
             </div>
           </div>
+          <Brush size="60" className="mx-auto mt-22 text-rose-950" />
         </div>
       </section>
       {/* Kontakt-sektion med semi-transparent bakgrund */}
