@@ -426,7 +426,7 @@ export default function MainContent() {
             />
             <ProjectCard
               title="Mandaleido"
-              description="Ett program för visual jockeys som skapar kaleidoskopiska animationer i realtid av bilder man väljer. De olika effekterna justeras men scrolling. Kontrollerna har separata fönster så att man kan ha effekterna i fullskärm genom exempelvis projektor."
+              description="Ett program för visual jockeys som skapar kaleidoskopiska animationer i realtid av bilder man väljer. De olika effekterna justeras med scrolling. Kontrollerna har separata fönster så att man kan ha effekterna i fullskärm genom exempelvis projektor."
               technologies={["Adobe AIR", "AS3", "Adobe Animator"]}
               githubLink=""
               youtubeLink="https://youtu.be/V7Cxf1Wduok"
@@ -597,11 +597,15 @@ export default function MainContent() {
             Kontakta Mig
           </h2>
           <p
+            className="text-lg text-gray-300 mb-1"
+            //  data-animation="subtle-fade-in-up"
+          >
+            Vill du involvera mig i något, fråga ut mig eller ge mig smicker?
+          </p>    <p
             className="text-lg text-gray-300 mb-8"
             //  data-animation="subtle-fade-in-up"
           >
-            Vill du involvera mig i något, fråga ut mig eller ge mig smicker,
-            tveka då inte att höra av dig med hjälp av formuläret nedan!
+            Tveka då inte att höra av dig med hjälp av formuläret nedan!
           </p>
           <ContactForm />
           <div className="space-y-6 mt-12" data-animation="subtle-fade-in-up">

@@ -52,36 +52,38 @@ export default function ContactForm() {
       >
         <input type="hidden" name="form-name" value="contact" />
         <p className="my-4">
-          <label htmlFor="yourname">Ditt namn:</label> <br />
+          <label htmlFor="yourname">Hur var namnet?</label> <br />
           <input
             type="text"
             name="name"
             id="yourname"
+            placeholder="Vem är du vem är jag vem är vi?"
             value={formData.name}
             onChange={handleChange}
-            className="bg-emerald-100 text-gray-900 text-md  rounded-lg focus:bg-amber-100 w-full p-2"
+            className="bg-emerald-100 text-rose-950 text-md  rounded-lg focus:bg-amber-100 w-full p-2"
           />
         </p>
         <p className="my-4">
-          <label htmlFor="youremail">Din email:</label> <br />
+          <label htmlFor="youremail">Email på något sätt:</label> <br />
           <input
             type="email"
             name="email"
             id="youremail"
+            placeholder="får.vara@hitte.på"
             value={formData.email}
             onChange={handleChange}
-            className="bg-emerald-100 text-gray-900 text-md  rounded-lg focus:bg-amber-100 w-full p-2"
+            className="bg-emerald-100 text-rose-950 text-md  rounded-lg focus:bg-amber-100 w-full p-2"
           />
         </p>
         <p className="my-4">
-          <label htmlFor="yourmessage">Meddelande:</label> <br />
+          <label htmlFor="yourmessage">Vad önskar ni framföra?</label> <br />
           <textarea
             name="message"
             id="yourmessage"
-            placeholder="Imponerande portfolio, vill du arbeta med oss?"
+            placeholder="Imponerande portfolio, vilket datum kan du börja arbeta?"
             value={formData.message}
             onChange={handleChange}
-            className="bg-emerald-100 text-gray-900 text-md  rounded-lg focus:bg-amber-100 w-full p-2"
+            className="bg-emerald-100 text-rose-950 text-md  rounded-lg focus:bg-amber-100 w-full p-2"
           ></textarea>
         </p>
         <p className="text-right">
