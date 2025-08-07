@@ -288,7 +288,10 @@ export default function MainContent() {
               <p className="font-body space-y-6">
                 En utvecklare som inte är rädd för inveckling. Har funnits med
                 sedan Macromedia Flash -tiden och har genomgått en intensiv
-                modernisering av sina kunskaper.
+                modernisering av sina kunskaper. Det som började med
+                estetiska programmet på gymnasiet, fortsatte med
+                interaktionsteknologi på högskolan innan det döks ner i
+                programmeringsdjupet i arbetslivet följt av fullstack-utvecklarhästen med Lexicon. I stora drag.
               </p>
               <p className="font-body space-y-6">
                 Kan uppskatta enkelheten i det minimalistiska, men har förmågan
