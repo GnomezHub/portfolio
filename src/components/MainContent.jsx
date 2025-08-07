@@ -288,10 +288,11 @@ export default function MainContent() {
               <p className="font-body space-y-6">
                 En utvecklare som inte är rädd för inveckling. Har funnits med
                 sedan Macromedia Flash -tiden och har genomgått en intensiv
-                modernisering av sina kunskaper. Det som började med
-                estetiska programmet på gymnasiet, fortsatte med
-                interaktionsteknologi på högskolan innan det döks ner i
-                programmeringsdjupet i arbetslivet följt av fullstack-utvecklarhästen med Lexicon. I stora drag.
+                modernisering av sina kunskaper. Det som började med estetiska
+                programmet på gymnasiet, fortsatte med interaktionsteknologi på
+                högskolan innan det döks ner i programmeringsdjupet i
+                arbetslivet följt av fullstack-utvecklarhästen med Lexicon. I
+                stora drag.
               </p>
               <p className="font-body space-y-6">
                 Kan uppskatta enkelheten i det minimalistiska, men har förmågan
@@ -582,6 +583,20 @@ export default function MainContent() {
                 </div>
               ))}
             </div>
+          </div>
+          <div className="text-center mt-12">
+            {/* https://www.facebook.com/media/set/?set=a.474412444834&type=3 */}
+
+            <a
+              href="https://www.facebook.com/media/set/?set=a.474412444834&type=3"
+              target="_blank"
+              rel="noopener noreferrer"
+              className=" inline-flex items-center justify-center bg-teal-700 hover:bg-emerald-600
+               text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+            >
+              äldre, fluoroscerande målningar
+              <ExternalLink size={22} className="ml-3" />
+            </a>
           </div>
           <Brush size="60" className="mx-auto mt-22 text-rose-950" />
         </div>
