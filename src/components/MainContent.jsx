@@ -229,7 +229,7 @@ export default function MainContent() {
   };
 
   return (
-    <main className="relative z-20 md:pl-0 pb-16 md:pb-0 scroll-smooth">
+    <main className="relative z-20 md:pl-0 mb-16 md:mb-0 scroll-smooth">
       {/* ... (all of your existing sections: home, about, skills, projects) ... */}
       {/* Hem-sektion */}
       <section
@@ -586,7 +586,7 @@ export default function MainContent() {
       {/* Kontakt-sektion med semi-transparent bakgrund */}
       <section
         id="contact"
-        className="py-24 px-6 md:pl-26 bg-gray-900 border-t-2 border-white/20"
+        className="py-24 px-6 md:pl-26 bg-gray-900 pb-18 border-t-2 border-white/20"
       >
         <div className="max-w-2xl mx-auto text-center">
           <Mail size="60" className="mx-auto mb-8 text-indigo-700 " />
@@ -601,7 +601,8 @@ export default function MainContent() {
             //  data-animation="subtle-fade-in-up"
           >
             Vill du involvera mig i något, fråga ut mig eller ge mig smicker?
-          </p>    <p
+          </p>{" "}
+          <p
             className="text-lg text-gray-300 mb-8"
             //  data-animation="subtle-fade-in-up"
           >
