@@ -1,5 +1,7 @@
 import ProjectCard from "./ProjectCard";
 import ContactForm from "./ContactForm";
+import SculptureAnimation from "./SculptureAnimation";
+
 import Eye from "./Eye";
 import React, { useState, useEffect, useRef } from "react";
 
@@ -305,12 +307,13 @@ export default function MainContent() {
             </div>
           </div>
           <img
-            src="assets/skulptur_andrasidan.png"
+            src="./assets/sculptures/sculptur_front.png"
             alt="sculpture"
             className="w-30 mx-auto py-6"
             data-animation="softZoomInUp"
             data-stagger-index={1}
           />
+          {/* <SculptureAnimation /> */}
         </div>
       </section>
       {/* Färdigheter-sektion med semi-transparent bakgrund */}
