@@ -396,7 +396,7 @@ export default function MainContent() {
               description="Ett bageri som erbjuder cupcakes och bröllopstårtor. Responsiv design för datorskärm och telefon."
               technologies={["React", "Tailwind CSS"]}
               githubLink="https://github.com/GnomezHub/munamii"
-              liveLink="https://munamiii.netlify.app"
+              liveLink="https://munamii-cakery.netlify.app/"
               image="assets/munamii.png"
               index={0}
               animationType="fadeInLeft"
