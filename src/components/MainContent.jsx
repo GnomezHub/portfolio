@@ -39,68 +39,68 @@ export default function MainContent() {
   const [images] = useState([
     {
       id: 1,
-      src: "assets/paintings/fetuslotus.jpg",
+      src: "assets/paintings/fetuslotus.webp",
       alt: "En surrealistisk figur med många ögon som sitter i lotusställning",
       title: "Lotusfoster",
     },
     {
       id: 2,
-      src: "assets/paintings/elephantman.jpg",
+      src: "assets/paintings/elephantman.webp",
       alt: "En surrealistisk scen med djur och en elefantmänniska",
       title: "Elefantmannen",
     },
     {
       id: 3,
-      src: "assets/paintings/mariemaid.jpg",
+      src: "assets/paintings/mariemaid.webp",
       alt: "En surrealistisk målning med en sjöjungfru och fantasifigurer",
       title: "Mariemaiden",
     },
     {
       id: 4,
-      src: "assets/paintings/fishybongbong.jpg",
+      src: "assets/paintings/fishybongbong.webp",
       alt: "En abstrakt målning av en fisk med bubblor",
       title: "Fishy bongbong",
     },
     {
       id: 5,
-      src: "assets/paintings/girltangled.jpg",
+      src: "assets/paintings/girltangled.webp",
       alt: "En naken kvinnofigur omgiven av abstrakta former",
       title: "Flicka Färgtrasslad",
     },
     {
       id: 6,
-      src: "assets/paintings/lycoigruff.jpg",
+      src: "assets/paintings/lycoigruff.webp",
       alt: "En varulvskatt under en fullmåne",
       title: "Månens Väktare",
     },
 
     {
       id: 7,
-      src: "assets/paintings/trappedfantasy.jpg",
+      src: "assets/paintings/trappedfantasy.webp",
       alt: "Ett ansikte med blått hår som tittar fram genom persienner",
       title: "Fängslad Fantasi",
     },
     {
       id: 8,
-      src: "assets/paintings/couplepop.jpg",
+      src: "assets/paintings/couplepop.webp",
       alt: "Ett par poppar i en färgglad stil",
       title: "Pop-par",
     },
     {
       id: 9,
-      src: "assets/paintings/deepdive.jpg",
+      src: "assets/paintings/deepdive.webp",
       alt: "En färgglad marulk i djuphavet",
       title: "Deep Dive",
     },
     {
       id: 10,
-      src: "assets/paintings/femmeforbidden.jpg",
+      src: "assets/paintings/femmeforbidden.webp",
       alt: "En stiliserad kvinnofigur i underkläder med ett lås",
       title: "Femme Forbidden",
     },
     {
       id: 11,
-      src: "assets/paintings/zenzloth.jpg",
+      src: "assets/paintings/zenzloth.webp",
       alt: "And I was like whatever bitches, and the bitches whatevered",
       title: "And The Bitches Whatevered",
     },
@@ -274,7 +274,7 @@ export default function MainContent() {
             {/* */}
             <div className="md:w-1/3 mb-8 md:mb-0" data-animation="fadeInLeft">
               <img
-                src="assets/dannyleaves_smaller.jpg"
+                src="assets/dannyleaves_smaller.webp"
                 alt="Danny Gomez"
                 className="rounded-full w-64 h-64 object-cover mx-auto shadow-2xl border-4 border-emerald-500/50 transform hover:scale-105 transition-transform duration-300"
               />
@@ -307,7 +307,7 @@ export default function MainContent() {
             </div>
           </div>
           <img
-            src="./assets/sculptures/sculptur_front.png"
+            src="./assets/sculpture_front.webp"
             alt="sculpture"
             className="w-30 mx-auto py-6"
             data-animation="softZoomInUp"
@@ -397,7 +397,7 @@ export default function MainContent() {
               technologies={["React", "Tailwind CSS"]}
               githubLink="https://github.com/GnomezHub/munamii"
               liveLink="https://munamii-cakery.netlify.app/"
-              image="assets/munamii.png"
+              image="assets/projects/munamii.webp"
               index={0}
               animationType="fadeInLeft"
             />
@@ -407,7 +407,7 @@ export default function MainContent() {
               technologies={["MVC", "C#", "SQL", "Bootstrap"]}
               githubLink="https://github.com/GnomezHub/MVC-HollyView"
               liveLink=""
-              image="assets/movies_list.png"
+              image="assets/projects/movies_list.webp"
               index={1}
               animationType="zoomIn"
             />
@@ -417,7 +417,7 @@ export default function MainContent() {
               technologies={["React", "Tailwind CSS", "Web API"]}
               githubLink="https://github.com/GnomezHub/crabby-weather"
               liveLink="https://crabby-weather.netlify.app"
-              image="assets/crabby-weather.png"
+              image="assets/projects/crabby-weather.webp"
               index={2}
               animationType="fadeInRight"
             />
@@ -427,7 +427,7 @@ export default function MainContent() {
               technologies={["C#", "Entity Framework", "SQL server"]}
               githubLink="https://github.com/GnomezHub/TrackYourASSetsEntityFramework"
               liveLink=""
-              image="assets/trackYourASSets.png"
+              image="assets/projects/trackYourASSets.webp"
               index={5}
               animationType="zoomIn"
             />
@@ -437,7 +437,7 @@ export default function MainContent() {
               technologies={["Adobe AIR", "AS3", "Adobe Animator"]}
               githubLink=""
               youtubeLink="https://youtu.be/V7Cxf1Wduok"
-              image="assets/mandaleido.jpg"
+              image="assets/projects/mandaleido.webp"
               index={6}
               animationType="fadeInLeft"
             />
@@ -453,7 +453,7 @@ export default function MainContent() {
               ]}
               downloadLink="https://drive.google.com/file/d/1x4KYAYfpvtpRSwuOviNQVUSS7WKm8lMn/view?usp=drive_link"
               youtubeLink="https://youtu.be/VLAaweiRSUk"
-              image="assets/Platformercat.jpg"
+              image="assets/projects/Platformercat.webp"
               index={7}
               animationType="fadeInRight"
             />
@@ -647,7 +647,7 @@ export default function MainContent() {
 
             <div className="flex justify-center space-x-6 pt-4">
               <a
-                href="https://gnomezhub.github.io/"
+                href="hhttps://github.com/GnomezHub/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transform hover:scale-110 transition-all duration-300"
@@ -665,7 +665,7 @@ export default function MainContent() {
           </div>
         </div>
         <img
-          src="assets/skulptur_sidan_edit.png"
+          src="assets/skulptur_sidan_edit.webp"
           alt="dude"
           className="w-30 absolute bottom-9 right-0"
         />

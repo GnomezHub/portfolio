@@ -60,7 +60,7 @@ export default function ContactForm() {
             placeholder="Vem är du vem är jag vem är vi?"
             value={formData.name}
             onChange={handleChange}
-            className="bg-emerald-100 text-rose-950 text-md  rounded-lg focus:bg-amber-100 w-full p-2"
+            className="bg-emerald-100 text-rose-950 text-md rounded-lg focus:bg-amber-100 w-full p-2"
           />
         </p>
         <p className="my-4">

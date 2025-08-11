@@ -30,7 +30,7 @@ export default function ProjectCard({
   return (
     <div
       className="bg-gray-800 rounded-xl shadow-2xl overflow-hidden flex flex-col
-      border border-teal-600/40" // hover:border-teal-500"
+      border border-teal-600/40 hover:border-teal-500"
       //  transform hover:scale-[1.03] transition-transform duration-300 ease-in-out
 
       //  data-animation={animationType}
