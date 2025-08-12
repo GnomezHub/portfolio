@@ -102,7 +102,7 @@ const App = () => {
       <div
         className="fixed top-0 left-0 w-2000 h-2626 bg-center z-0"
         style={{
-          backgroundImage: "url(assets/foresty_2000_2626.jpg)",
+          backgroundImage: "url(assets/foresty_2000_2626.webp)",
           //  backgroundSize: "2000px 2626px", // Exempel på fast storlek
           transform: `translateY(${parallaxOffset}px)`,
         }}
