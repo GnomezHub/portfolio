@@ -11,6 +11,8 @@ Detta projekt använder:
 - **JavaScript**, **CSS**, **HTML**
 - **ESLint** – för kodkvalitet och stilkontroll
 
+<img width="952" height="693" alt="Skärmbild 2025-08-12 084253" src="https://github.com/user-attachments/assets/8384edaa-7600-41dc-aa80-321eb4539e8d" />
+
 ## 📁 Struktur
 
 ```plaintext
@@ -24,4 +26,4 @@ portfolio/
 ├── package-lock.json   # Låsningsfil för npm
 └── README.md           # Denna fil
 
-<img width="952" height="693" alt="Skärmbild 2025-08-12 084253" src="https://github.com/user-attachments/assets/ccfa7944-af3d-432a-af9e-82b094837226" />
+
