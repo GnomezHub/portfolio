@@ -1,12 +1,29 @@
-# React + Vite
+# 🎨 Danny Gnomez Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Välkommen till min personliga portfolio – byggd med **React** och **Vite** för snabb och modern webbutveckling. Här visar jag upp mina projekt, färdigheter och passion för frontendutveckling.
 
-Currently, two official plugins are available:
+## 🚀 Teknikstack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Detta projekt använder:
 
-## Expanding the ESLint configuration
+- **React** – komponentbaserat ramverk för användargränssnitt
+- **Vite** – blixtsnabb utvecklingsserver och byggverktyg
+- **JavaScript**, **CSS**, **HTML**
+- **ESLint** – för kodkvalitet och stilkontroll
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<img width="952" height="693" alt="Skärmbild 2025-08-12 084253" src="https://github.com/user-attachments/assets/8384edaa-7600-41dc-aa80-321eb4539e8d" />
+
+## 📁 Struktur
+
+```plaintext
+portfolio/
+├── public/             # Statisk innehåll (t.ex. bilder i WebP-format)
+├── src/                # React-komponenter och logik
+├── index.html          # Inträdespunkt för appen
+├── vite.config.js      # Vite-konfiguration
+├── eslint.config.js    # ESLint-regler
+├── package.json        # Projektmetadata och beroenden
+├── package-lock.json   # Låsningsfil för npm
+└── README.md           # Denna fil
+
+
