@@ -402,8 +402,18 @@ export default function MainContent() {
               githubLink="https://github.com/GnomezHub/munamii"
               liveLink="https://munamii-cakery.netlify.app/"
               image="assets/projects/munamii.webp"
-              index={0}
+              index={4}
               animationType="fadeInLeft"
+            />
+            <ProjectCard
+              title="Elpriset"
+              description="En app som visar spotpriserna för dagen och en planeringshjälp där bästa starttide för varje aktivitet beräknas utifrån aktivitetens varaktighet och de förväntade elpriserna."
+              technologies={["React", "Supabase", "SQL", "Web API", "Tailwind CSS"]}
+              githubLink="https://github.com/GnomezHub/MVC-HollyView"
+              liveLink=""
+              image="assets/projects/elpriset.webp"
+              index={1}
+              animationType="zoomIn"
             />
             <ProjectCard
               title="Filmdatabas"
@@ -412,8 +422,8 @@ export default function MainContent() {
               githubLink="https://github.com/GnomezHub/MVC-HollyView"
               liveLink=""
               image="assets/projects/movies_list.webp"
-              index={1}
-              animationType="zoomIn"
+              index={2}
+              animationType="fadeInLeft"
             />
             <ProjectCard
               title="Crabby Weather"
@@ -422,7 +432,7 @@ export default function MainContent() {
               githubLink="https://github.com/GnomezHub/crabby-weather"
               liveLink="https://crabby-weather.netlify.app"
               image="assets/projects/crabby-weather.webp"
-              index={2}
+              index={3}
               animationType="fadeInRight"
             />
             <ProjectCard
