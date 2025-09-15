@@ -408,9 +408,15 @@ export default function MainContent() {
             <ProjectCard
               title="Elpriset"
               description="En app som visar spotpriserna för dagen och en planeringshjälp där bästa starttide för varje aktivitet beräknas utifrån aktivitetens varaktighet och de förväntade elpriserna."
-              technologies={["React", "Supabase", "SQL", "Web API", "Tailwind CSS"]}
-              githubLink="https://github.com/GnomezHub/MVC-HollyView"
-              liveLink=""
+              technologies={[
+                "React",
+                "Supabase",
+                "SQL",
+                "Web API",
+                "Tailwind CSS",
+              ]}
+              githubLink="https://github.com/GnomezHub/elpriset"
+              liveLink="https://elpriset.netlify.app"
               image="assets/projects/elpriset.webp"
               index={1}
               animationType="zoomIn"
